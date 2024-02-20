@@ -1,5 +1,3 @@
-// Arrays for week days and months
-const weekDays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
 const getMonths = (year) => {
   return [
     { month: "January", days: 31 },
