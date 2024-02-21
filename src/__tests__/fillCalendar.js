@@ -1,4 +1,4 @@
-import { createMonthsCalendars, getFebruaryNbOfDays, getFirstDayOfTheMonth, getFirstDayOfTheYear, linearCalendar } from "../utils/fillCalendar"
+import { createMonthsCalendars, getFebruaryNbOfDays, getFirstDayOfTheMonth } from "../utils/fillCalendar"
 
 describe("Given I select a month from the months array", () => {
   test("Then I get the number of days for this month", () => {

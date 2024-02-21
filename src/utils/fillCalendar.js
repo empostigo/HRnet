@@ -27,7 +27,7 @@ export const getFirstDayOfTheMonth = (date) => {
   return new Date(year, month, 1).getDay()
 }
 
-export const createMonthsCalendars = (year) => {
+const createMonthsCalendars = (year) => {
   const NB_DAYS = 42
   const months = getMonths(year)
   let flatMonth = []
@@ -49,3 +49,5 @@ export const createMonthsCalendars = (year) => {
 
   return monthsArray
 }
+
+export default createMonthsCalendars
