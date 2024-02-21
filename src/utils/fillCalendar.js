@@ -30,10 +30,10 @@ export const getFirstDayOfTheMonth = (date) => {
 const createMonthsCalendars = (year) => {
   const NB_DAYS = 42
   const months = getMonths(year)
-  let flatMonth = []
 
-  let monthsArray = {}
+  let monthsArray = []
   for (let month in months) {
+    const flatMonth = []
     const firstDayOfTheMonth = getFirstDayOfTheMonth(new Date(year, month, 1))
 
     const nbOfPreviousDaysMonth = (months[month].month === "January" ? 31 : months[month - 1].days)
@@ -43,8 +43,12 @@ const createMonthsCalendars = (year) => {
     const leftToFill = NB_DAYS - flatMonth.length
     for (let i = 1; i <= leftToFill; i++) flatMonth.push(i)
 
-    monthsArray[months[month].month] = flatMonth
-    flatMonth = []
+
+    const monthObject = {
+      month: months[month].month,
+      monthTable: flatMonth
+    }
+    monthsArray.push(monthObject)
   }
 
   return monthsArray
