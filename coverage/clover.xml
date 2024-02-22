@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1708457459984" clover="3.2.0">
-  <project timestamp="1708457459984" name="All files">
+<coverage generated="1708594493868" clover="3.2.0">
+  <project timestamp="1708594493869" name="All files">
     <metrics statements="24" coveredstatements="24" conditionals="11" coveredconditionals="11" methods="4" coveredmethods="4" elements="39" coveredelements="39" complexity="0" loc="24" ncloc="24" packages="1" files="1" classes="1"/>
     <file name="fillCalendar.js" path="/home/mallow/Documents/Admin/FormationOpenclassrooms/Projets/Projet_14/HRnet/src/utils/fillCalendar.js">
       <metrics statements="24" coveredstatements="24" conditionals="11" coveredconditionals="11" methods="4" coveredmethods="4"/>
@@ -15,9 +15,9 @@
       <line num="30" count="1" type="stmt"/>
       <line num="31" count="1" type="stmt"/>
       <line num="32" count="1" type="stmt"/>
-      <line num="33" count="1" type="stmt"/>
+      <line num="34" count="1" type="stmt"/>
       <line num="35" count="1" type="stmt"/>
-      <line num="36" count="1" type="stmt"/>
+      <line num="36" count="12" type="stmt"/>
       <line num="37" count="12" type="stmt"/>
       <line num="39" count="12" type="cond" truecount="2" falsecount="0"/>
       <line num="40" count="12" type="cond" truecount="2" falsecount="0"/>
@@ -25,9 +25,9 @@
       <line num="42" count="366" type="stmt"/>
       <line num="43" count="12" type="stmt"/>
       <line num="44" count="92" type="stmt"/>
-      <line num="46" count="12" type="stmt"/>
       <line num="47" count="12" type="stmt"/>
-      <line num="50" count="1" type="stmt"/>
+      <line num="51" count="12" type="stmt"/>
+      <line num="54" count="1" type="stmt"/>
     </file>
   </project>
 </coverage>

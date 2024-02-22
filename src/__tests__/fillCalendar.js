@@ -155,7 +155,6 @@ describe("Given I have a year", () => {
     ]
 
     const monthsArray = createMonthsCalendars(2024)
-    //expect(monthsArray).toEqual(testResult)
-    expect(monthsArray).toBeTruthy()
+    expect(monthsArray).toEqual(testResult)
   })
 })

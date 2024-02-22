@@ -1,8 +1,14 @@
 // React
 import { useEffect, useState } from "react"
 
+// Components
+import Select from "./Select/Select"
+
 // Calendar filling function
 import createMonthsCalendars from "../../utils/fillCalendar"
+
+// Style
+import calendarStyle from "./Calendar.module.scss"
 
 const Calendar = ({ date }) => {
   const year = date.getFullYear()
@@ -11,10 +17,11 @@ const Calendar = ({ date }) => {
   const [day, setDay] = useState(date.getDate())
 
   const calendarTables = createMonthsCalendars(year)
+  const monthsList = calendarTables.map(item => item.month)
 
   return (
-    <article>
-      <h3>{calendarTables[month].month}</h3>
+    <article className={calendarStyle.dropdown}>
+      <Select list={monthsList} />
     </article>
   )
 }
