@@ -16,12 +16,15 @@ const Calendar = ({ date }) => {
   const [month, setMonth] = useState(date.getMonth())
   const [day, setDay] = useState(date.getDate())
 
+  const yearsTable = []
+  for (let i = 1900; i <= year; i++) yearsTable.push(i)
+
   const calendarTables = createMonthsCalendars(year)
   const monthsList = calendarTables.map(item => item.month)
 
   return (
     <article className={calendarStyle.dropdown}>
-      <Select list={monthsList} style="calendarStyle" />
+      <Select list={monthsList} style="calendarStyle" initValue={monthsList[date.getMonth()]} />
     </article>
   )
 }
