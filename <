@@ -21,7 +21,7 @@ const Calendar = ({ date }) => {
 
   return (
     <article className={calendarStyle.dropdown}>
-      <Select list={monthsList} style="calendarStyle" />
+      <Select list={monthsList} />
     </article>
   )
 }

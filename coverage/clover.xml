@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1708594493868" clover="3.2.0">
-  <project timestamp="1708594493869" name="All files">
+<coverage generated="1708622524110" clover="3.2.0">
+  <project timestamp="1708622524110" name="All files">
     <metrics statements="24" coveredstatements="24" conditionals="11" coveredconditionals="11" methods="4" coveredmethods="4" elements="39" coveredelements="39" complexity="0" loc="24" ncloc="24" packages="1" files="1" classes="1"/>
     <file name="fillCalendar.js" path="/home/mallow/Documents/Admin/FormationOpenclassrooms/Projets/Projet_14/HRnet/src/utils/fillCalendar.js">
       <metrics statements="24" coveredstatements="24" conditionals="11" coveredconditionals="11" methods="4" coveredmethods="4"/>

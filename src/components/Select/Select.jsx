@@ -1,10 +1,13 @@
 // React
 import { useEffect, useRef, useState } from "react"
 
-// Style
-import selectStyle from "./Select.module.scss"
+// Styles
+import singleSelectStyle from "./SingleSelect.module.scss"
+import calendarSelectStyle from "./CalendarSelect.module.scss"
 
-const Select = ({ list }) => {
+const Select = ({ list, style = "singleSelect" }) => {
+  const selectStyle = style === "singleSelect" ? singleSelectStyle : calendarSelectStyle
+
   const [dropdownState, setDropdownState] = useState({ open: false })
   const wrapper = useRef()
 
@@ -24,8 +27,11 @@ const Select = ({ list }) => {
   }, [])
 
   return (
-    <div ref={wrapper}>
-      <button onClick={toggleDropdown} className={selectStyle.button}>{list[0]}</button>
+    <div className={selectStyle.wrapper} ref={wrapper}>
+      <div>
+        <button onClick={toggleDropdown} className={selectStyle.button}>{list[0]}</button>
+        <img />
+      </div>
       {
         dropdownState.open &&
         (
