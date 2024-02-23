@@ -24,7 +24,10 @@ const Calendar = ({ date }) => {
 
   return (
     <article className={calendarStyle.dropdown}>
-      <Select list={monthsList} style="calendarStyle" initValue={monthsList[date.getMonth()]} />
+      <div className={calendarStyle.navbar}>
+        <Select list={monthsList} style="calendarStyle" initValue={monthsList[date.getMonth()]} />
+        <Select list={yearsTable} style="calendarStyle" initValue={year} />
+      </div>
     </article>
   )
 }
