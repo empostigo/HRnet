@@ -10,6 +10,7 @@ const Select = ({ initValue, style = "singleSelect", children }) => {
 
   const [dropdownState, setDropdownState] = useState({ open: false })
   const [buttonValue, setButtonValue] = useState(initValue)
+  const [wrapperHeight, setWrapperHeight] = useState(0)
 
   const wrapper = useRef()
 
@@ -29,6 +30,8 @@ const Select = ({ initValue, style = "singleSelect", children }) => {
   useEffect(() => {
     document.addEventListener("mousedown", hasClickOutside)
 
+    if (wrapper.current) setWrapperHeight(wrapper.current.offsetHeight)
+
     return () => document.removeEventListener("mousedown", hasClickOutside)
   }, [])
 
@@ -46,9 +49,9 @@ const Select = ({ initValue, style = "singleSelect", children }) => {
       </div>
       {
         dropdownState.open &&
-        childrenWithProps
+        <div style={{ top: "${wrapperHeight}" }}>{childrenWithProps}</div>
       }
-    </div>
+    </div >
   )
 }
 

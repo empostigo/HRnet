@@ -1,4 +1,5 @@
 .wrapper {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: end;
@@ -12,5 +13,4 @@
     border: none;
     cursor: pointer;
   }
-
 }
