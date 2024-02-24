@@ -1,10 +1,10 @@
 // React
 import { useEffect, useState } from "react"
 
-// paginationStyle
+// Style
 import paginationStyle from "./Pagination.module.scss"
 
-const Pagination = ({ items, itemsPerPage = 12, setContent, onChange }) => {
+const Pagination = ({ items, itemsPerPage = 12, onChange }) => {
   const [currentPage, setCurrentPage] = useState(1)
   const totalPages = Math.ceil(items.length / itemsPerPage)
 

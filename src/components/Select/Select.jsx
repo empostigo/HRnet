@@ -4,7 +4,6 @@ import React, { isValidElement, useEffect, useRef, useState } from "react"
 // Styles
 import singleSelectStyle from "./SingleSelect.module.scss"
 import calendarSelectStyle from "./CalendarSelect.module.scss"
-import Pagination from "../Pagination/Pagination"
 
 const Select = ({ initValue, style = "singleSelect", children }) => {
   const selectStyle = style === "singleSelect" ? singleSelectStyle : calendarSelectStyle
@@ -47,14 +46,6 @@ const Select = ({ initValue, style = "singleSelect", children }) => {
       </div>
       {
         dropdownState.open &&
-        /*
-      <ul className={selectStyle.list}>
-        {
-          list.map(item => <li key={`item-${item}`} className={selectStyle.item} onClick={() => setValue(item)}>{item}</li>)
-        }
-      </ul>
-        */
-        //<Pagination items={list} style={selectStyle} setContent={setValue} />
         childrenWithProps
       }
     </div>
