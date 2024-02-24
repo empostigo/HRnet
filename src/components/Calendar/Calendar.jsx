@@ -3,6 +3,7 @@ import { useEffect, useState } from "react"
 
 // Components
 import Select from "../Select/Select"
+import Pagination from "../Pagination/Pagination"
 
 // Calendar filling function
 import createMonthsCalendars from "../../utils/fillCalendar"
@@ -25,8 +26,12 @@ const Calendar = ({ date }) => {
   return (
     <article className={calendarStyle.dropdown}>
       <div className={calendarStyle.navbar}>
-        <Select list={monthsList} style="calendarStyle" initValue={monthsList[date.getMonth()]} />
-        <Select list={yearsTable} style="calendarStyle" initValue={year} />
+        <Select style="calendarStyle" initValue={monthsList[date.getMonth()]}>
+          <Pagination items={monthsList} />
+        </Select>
+        <Select style="calendarStyle" initValue={year}>
+          <Pagination items={yearsTable} />
+        </Select>
       </div>
     </article>
   )

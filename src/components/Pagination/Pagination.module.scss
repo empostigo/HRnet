@@ -1,0 +1,42 @@
+  .list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+    gap: 1em;
+    border: 1px solid blue;
+    border-radius: 5px;
+    margin: 0;
+    padding: 1em;
+  }
+
+  .item {
+    position: relative;
+    list-style: none;
+    text-align: center;
+    cursor: pointer;
+    padding: 1em;
+  }
+
+  .item:not(:nth-child(3n))::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    top: 10%;
+    bottom: 10%;
+    width: 1px;
+    background-color: black;
+  }
+
+  .item::before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 10%;
+    right: 10%;
+    height: 1px;
+    background-color: black;
+  }
+
+  .item:nth-last-child(-n+3)::before {
+    background-color: transparent;
+  }
