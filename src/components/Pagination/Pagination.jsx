@@ -5,8 +5,8 @@ import { useEffect, useState } from "react"
 import paginationStyle from "./Pagination.module.scss"
 
 const Pagination = ({ items, itemsPerPage = 12, onChange }) => {
-  const [currentPage, setCurrentPage] = useState(1)
   const totalPages = Math.ceil(items.length / itemsPerPage)
+  const [currentPage, setCurrentPage] = useState(totalPages)
 
   const changePage = (newPage) => {
     setCurrentPage((previousPage) => {
@@ -51,7 +51,12 @@ const Pagination = ({ items, itemsPerPage = 12, onChange }) => {
   return (
     <ul id="itemContainer" className={paginationStyle.list} tabIndex="0" >
       {itemsToShow.map(item =>
-        <li key={item} className={paginationStyle.item} onClick={() => onChange(item)}>{item}</li>
+        <li
+          key={`${item}-${crypto.randomUUID()}`}
+          className={paginationStyle.item}
+          style={{ cursor: item === null ? 'default' : 'pointer' }}
+          onClick={() => item !== null && onChange(item)}>{item}
+        </li>
       )}
     </ul>
   )

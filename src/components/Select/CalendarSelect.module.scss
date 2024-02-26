@@ -7,10 +7,32 @@
   font-weight: 700;
 
   .button {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    gap: 20px;
     font-size: inherit;
     font-weight: inherit;
     background-color: transparent;
     border: none;
     cursor: pointer;
+
+    .text {
+      margin-right: 40px;
+    }
+
+    >img {
+      width: 14px;
+      position: absolute;
+      top: 50%;
+      right: 5px;
+      transform: translateY(-50%);
+    }
+
+    .hidden {
+      visibility: hidden;
+    }
+
   }
 }

@@ -15,7 +15,6 @@
     position: relative;
     list-style: none;
     text-align: center;
-    cursor: pointer;
     padding: 1em;
   }
 
@@ -41,4 +40,8 @@
 
   .item:nth-last-child(-n+3)::before {
     background-color: transparent;
+  }
+
+  .selectedItem {
+    color: blue;
   }

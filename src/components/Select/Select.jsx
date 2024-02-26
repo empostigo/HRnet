@@ -1,6 +1,10 @@
 // React
 import React, { isValidElement, useEffect, useRef, useState } from "react"
 
+// Icons
+import angleDown from "../../assets/arrows/angle-down.svg"
+import angleUp from "../../assets/arrows/angle-up.svg"
+
 // Styles
 import singleSelectStyle from "./SingleSelect.module.scss"
 import calendarSelectStyle from "./CalendarSelect.module.scss"
@@ -43,10 +47,10 @@ const Select = ({ initValue, style = "singleSelect", children }) => {
 
   return (
     <div className={selectStyle.wrapper} ref={wrapper}>
-      <div>
-        <button onClick={toggleDropdown} className={selectStyle.button}>{buttonValue}</button>
-        <img />
-      </div>
+      <button onClick={toggleDropdown} className={selectStyle.button}><span className={selectStyle.text}>{buttonValue}</span>
+        <img src={angleDown} alt="Open Dropdown" className={dropdownState.open ? selectStyle.hidden : ""} />
+        <img src={angleUp} alt="Close Dropdown" className={!dropdownState.open ? selectStyle.hidden : ""} />
+      </button>
       {
         dropdownState.open &&
         <div style={{ top: "${wrapperHeight}" }}>{childrenWithProps}</div>
