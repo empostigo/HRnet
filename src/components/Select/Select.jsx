@@ -53,7 +53,7 @@ const Select = ({ initValue, style = "singleSelect", children }) => {
       </button>
       {
         dropdownState.open &&
-        <div style={{ top: "${wrapperHeight}" }}>{childrenWithProps}</div>
+        <div className={selectStyle.style} style={{ position: "absolute", top: `${wrapperHeight}px` }}>{childrenWithProps}</div>
       }
     </div >
   )
