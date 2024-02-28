@@ -9,7 +9,7 @@ import angleUp from "../../assets/arrows/angle-up.svg"
 import singleSelectStyle from "./SingleSelect.module.scss"
 import calendarSelectStyle from "./CalendarSelect.module.scss"
 
-const Select = ({ initValue, style = "singleSelect", children }) => {
+const Select = ({ initValue, style = "singleSelect", children, onValueChange }) => {
   const selectStyle = style === "singleSelect" ? singleSelectStyle : calendarSelectStyle
 
   const [dropdownState, setDropdownState] = useState({ open: false })
@@ -36,8 +36,10 @@ const Select = ({ initValue, style = "singleSelect", children }) => {
 
     if (wrapper.current) setWrapperHeight(wrapper.current.offsetHeight)
 
+    onValueChange(buttonValue)
+
     return () => document.removeEventListener("mousedown", hasClickOutside)
-  }, [])
+  }, [buttonValue, onValueChange])
 
   const childrenWithProps = React.Children.map(children, child => {
     if (React, isValidElement(child)) return React.cloneElement(child, { onChange: setValue })
@@ -47,7 +49,9 @@ const Select = ({ initValue, style = "singleSelect", children }) => {
 
   return (
     <div className={selectStyle.wrapper} ref={wrapper}>
-      <button onClick={toggleDropdown} className={selectStyle.button}><span className={selectStyle.text}>{buttonValue}</span>
+      <button
+        onClick={toggleDropdown}
+        className={selectStyle.button}><span className={selectStyle.text}>{buttonValue}</span>
         <img src={angleDown} alt="Open Dropdown" className={dropdownState.open ? selectStyle.hidden : ""} />
         <img src={angleUp} alt="Close Dropdown" className={!dropdownState.open ? selectStyle.hidden : ""} />
       </button>

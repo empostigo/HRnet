@@ -14,10 +14,18 @@ import createMonthsCalendars from "../../utils/fillCalendar"
 import calendarStyle from "./Calendar.module.scss"
 
 const Calendar = ({ date }) => {
-  const year = date.getFullYear()
+  const [year, setYear] = useState(date.getFullYear())
 
   const [month, setMonth] = useState(date.getMonth())
   const [day, setDay] = useState(date.getDate())
+
+  const onMonthChange = (month) => {
+    setMonth(month)
+  }
+
+  const onYearChange = (year) => {
+    setYear(year)
+  }
 
   const createYearTable = () => {
     const lastYear = Math.ceil(year / 10) * 10 - 1
@@ -42,10 +50,10 @@ const Calendar = ({ date }) => {
   return (
     <article className={calendarStyle.calendar}>
       <div className={calendarStyle.navbar}>
-        <Select style="calendarStyle" initValue={monthsList[month]}>
+        <Select style="calendarStyle" initValue={monthsList[month]} onValueChange={onMonthChange}>
           <UList list={monthsList} className={calendarStyle} />
         </Select>
-        <Select style="calendarStyle" initValue={year}>
+        <Select style="calendarStyle" initValue={year} onValueChange={onYearChange}>
           <Pagination items={yearsTable} />
         </Select>
       </div>
