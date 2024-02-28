@@ -5,6 +5,7 @@ import { useEffect, useState } from "react"
 import Select from "../Select/Select"
 import Pagination from "../Pagination/Pagination"
 import UList from "../UList/UList"
+import DaysTable from "../DaysTable/DaysTable"
 
 // Calendar filling function
 import createMonthsCalendars from "../../utils/fillCalendar"
@@ -41,7 +42,7 @@ const Calendar = ({ date }) => {
   return (
     <article className={calendarStyle.calendar}>
       <div className={calendarStyle.navbar}>
-        <Select style="calendarStyle" initValue={monthsList[date.getMonth()]}>
+        <Select style="calendarStyle" initValue={monthsList[month]}>
           <UList list={monthsList} className={calendarStyle} />
         </Select>
         <Select style="calendarStyle" initValue={year}>
