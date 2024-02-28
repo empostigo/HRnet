@@ -12,20 +12,6 @@ import createMonthsCalendars from "../../utils/fillCalendar"
 // Style
 import calendarStyle from "./Calendar.module.scss"
 
-
-/*
-const UList = ({ list, onChange }) => {
-  return (
-    <ul className={calendarStyle.list}>
-      {
-        list.map(item => <li key={`item-${item}`} className={calendarStyle.item} onClick={() => onChange(item)}>{item}</li>)
-      }
-    </ul>
-
-  )
-}
-*/
-
 const Calendar = ({ date }) => {
   const year = date.getFullYear()
 
