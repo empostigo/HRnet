@@ -19,14 +19,6 @@ const Calendar = ({ date }) => {
   const [month, setMonth] = useState(date.getMonth())
   const [day, setDay] = useState(date.getDate())
 
-  const onMonthChange = (month) => {
-    setMonth(month)
-  }
-
-  const onYearChange = (year) => {
-    setYear(year)
-  }
-
   const createYearTable = () => {
     const lastYear = Math.ceil(year / 10) * 10 - 1
     const yearsTable = []
@@ -47,6 +39,15 @@ const Calendar = ({ date }) => {
   const calendarTables = createMonthsCalendars(year)
   const monthsList = calendarTables.map(item => item.month)
 
+  const onMonthChange = (month) => {
+    const index = calendarTables.findIndex(monthObject => monthObject.month === month)
+    setMonth(index)
+  }
+
+  const onYearChange = (year) => {
+    setYear(year)
+  }
+
   return (
     <article className={calendarStyle.calendar}>
       <div className={calendarStyle.navbar}>
@@ -57,6 +58,7 @@ const Calendar = ({ date }) => {
           <Pagination items={yearsTable} />
         </Select>
       </div>
+      <DaysTable days={calendarTables[month].monthTable} />
     </article>
   )
 }

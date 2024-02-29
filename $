@@ -1,0 +1,14 @@
+// Style
+import daysStyle from "./DaysTable.module.scss"
+
+const DaysTable = ({ days }) => {
+  return (
+    <div className={daysStyle.wrapper}>
+      {
+        days.map(day => <div key={`${day}-${crypto.randomUUID()}`} className={daysStyle.day} >{day}</div>)
+      }
+    </div>
+  )
+}
+
+export default DaysTable
