@@ -1,8 +1,12 @@
-const UList = ({ list, className, onChange }) => {
+// Style
+import ulistStyle from "./UList.module.scss"
+
+const UList = ({ list, onChange }) => {
+
   return (
-    <ul className={className.list}>
+    <ul className={ulistStyle.ul}>
       {
-        list.map(item => <li key={`item-${item}`} className={className.item} onClick={() => onChange(item)}>{item}</li>)
+        list.map(item => <li key={`item-${item}`} onClick={() => onChange(item)} className={ulistStyle.li}>{item}</li>)
       }
     </ul>
   )

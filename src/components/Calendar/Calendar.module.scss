@@ -1,5 +1,3 @@
-@import "../../Sass/utils/mixins";
-
 .calendar {
   display: flex;
   flex-direction: column;
@@ -11,5 +9,48 @@
     gap: 20px;
   }
 
-  @include squareSelect()
+  ul {
+    position: absolute;
+    right: 0;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+    gap: 1em;
+    border: 1px solid blue;
+    border-radius: 5px;
+    margin: 0;
+    padding: 1em;
+  }
+
+  li {
+    position: relative;
+    list-style: none;
+    text-align: center;
+    padding: 1em;
+    cursor: pointer;
+  }
+
+  li:not(:nth-child(3n))::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    top: 10%;
+    bottom: 10%;
+    width: 1px;
+    background-color: black;
+  }
+
+  li::before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 10%;
+    right: 10%;
+    height: 1px;
+    background-color: black;
+  }
+
+  li:nth-last-child(-n+3)::before {
+    background-color: transparent;
+  }
 }

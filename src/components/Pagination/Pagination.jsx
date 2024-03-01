@@ -1,9 +1,6 @@
 // React
 import { useEffect, useState } from "react"
 
-// Style
-import paginationStyle from "./Pagination.module.scss"
-
 const Pagination = ({ items, itemsPerPage = 12, onChange }) => {
   const totalPages = Math.ceil(items.length / itemsPerPage)
   const [currentPage, setCurrentPage] = useState(totalPages)
@@ -49,11 +46,10 @@ const Pagination = ({ items, itemsPerPage = 12, onChange }) => {
 
 
   return (
-    <ul id="itemContainer" className={paginationStyle.list} tabIndex="0" >
+    <ul id="itemContainer" tabIndex="0" >
       {itemsToShow.map(item =>
         <li
           key={`${item}-${crypto.randomUUID()}`}
-          className={paginationStyle.item}
           style={{ cursor: item === null ? 'default' : 'pointer' }}
           onClick={() => item !== null && onChange(item)}>{item}
         </li>

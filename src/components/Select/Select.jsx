@@ -6,11 +6,9 @@ import angleDown from "../../assets/arrows/angle-down.svg"
 import angleUp from "../../assets/arrows/angle-up.svg"
 
 // Styles
-import singleSelectStyle from "./SingleSelect.module.scss"
-import calendarSelectStyle from "./CalendarSelect.module.scss"
+import selectStyle from "./Select.module.scss"
 
-const Select = ({ initValue, style = "singleSelect", children, onValueChange }) => {
-  const selectStyle = style === "singleSelect" ? singleSelectStyle : calendarSelectStyle
+const Select = ({ initValue, children, onValueChange }) => {
 
   const [dropdownState, setDropdownState] = useState({ open: false })
   const [buttonValue, setButtonValue] = useState(initValue)

@@ -1,5 +1,5 @@
 @mixin squareSelect {
-  .list {
+  ul {
     position: absolute;
     right: 0;
     display: grid;
@@ -12,7 +12,7 @@
     padding: 1em;
   }
 
-  .item {
+  li {
     position: relative;
     list-style: none;
     text-align: center;
@@ -20,7 +20,7 @@
     cursor: pointer;
   }
 
-  .item:not(:nth-child(3n))::after {
+  li:not(:nth-child(3n))::after {
     content: "";
     position: absolute;
     right: 0;
@@ -30,7 +30,7 @@
     background-color: black;
   }
 
-  .item::before {
+  li::before {
     content: "";
     position: absolute;
     bottom: 0;
@@ -40,7 +40,7 @@
     background-color: black;
   }
 
-  .item:nth-last-child(-n+3)::before {
+  li:nth-last-child(-n+3)::before {
     background-color: transparent;
   }
 }
