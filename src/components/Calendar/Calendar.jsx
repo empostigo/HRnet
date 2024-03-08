@@ -48,6 +48,10 @@ const Calendar = ({ date }) => {
   const calendarTables = createMonthsCalendars(year)
   const monthsList = calendarTables.map(item => item.month)
 
+  const onDayChange = (day) => {
+    setDay(day)
+  }
+
   const onMonthChange = (month) => {
     const index = calendarTables.findIndex(monthObject => monthObject.month === month)
     setMonth(index)
@@ -67,7 +71,7 @@ const Calendar = ({ date }) => {
           <Pagination items={yearsTable} />
         </Select>
       </div>
-      <DaysTable days={calendarTables[month].monthTable} />
+      <DaysTable days={calendarTables[month].monthTable} onValueChange={onDayChange} />
     </article>
   )
 }

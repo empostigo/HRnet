@@ -1,8 +1,16 @@
 .wrapper {
-  display: flex;
 
   .day {
-    margin: 7px;
+    padding: 7px;
+    text-align: center;
     cursor: pointer;
+
+    &::hover {
+      background-color: red;
+    }
+
+    &--selected {
+      background-color: beige;
+    }
   }
 }
