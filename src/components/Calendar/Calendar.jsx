@@ -12,7 +12,7 @@ import createMonthsCalendars from "../../utils/fillCalendar"
 // Style
 import calendarStyle from "./Calendar.module.scss"
 
-const MonthList = ({ list }) => {
+const MonthList = ({ list, onChange }) => {
   return (
     <ul>
       {
