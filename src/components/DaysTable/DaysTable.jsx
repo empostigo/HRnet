@@ -2,7 +2,7 @@
 import { useState } from "react"
 import daysStyle from "./DaysTable.module.scss"
 
-const DaysTable = ({ days, onValueChange }) => {
+const DaysTable = ({ days, onChange }) => {
   const nbDaysTable = 42
   const [selectedIndex, setSelectedIndex] = useState(-1)
   const [isSelected, setIsSelected] = useState(Array(nbDaysTable).fill(false))
@@ -19,6 +19,7 @@ const DaysTable = ({ days, onValueChange }) => {
             onClick={() => {
               setIsSelected(previousState => previousState.map((day, index) => j === index ? true : day))
               setSelectedIndex(j)
+              onChange(days[j])
             }}
           >
             {days[j]}

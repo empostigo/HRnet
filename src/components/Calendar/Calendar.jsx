@@ -61,17 +61,26 @@ const Calendar = ({ date }) => {
     setYear(year)
   }
 
+  useEffect(() => {
+    console.log(`${day}/${month + 1}/${year}`)
+  }, [day, month, year])
+
   return (
     <article className={calendarStyle.calendar}>
-      <div className={calendarStyle.navbar}>
-        <Select initValue={monthsList[month]} onValueChange={onMonthChange}>
-          <MonthList list={monthsList} />
-        </Select>
-        <Select initValue={year} onValueChange={onYearChange}>
-          <Pagination items={yearsTable} />
-        </Select>
-      </div>
-      <DaysTable days={calendarTables[month].monthTable} onValueChange={onDayChange} />
+      <header className={calendarStyle.header}>
+        <button>
+          <img />
+        </button>
+        <div className={calendarStyle.navbar}>
+          <Select initValue={monthsList[month]} onValueChange={onMonthChange}>
+            <MonthList list={monthsList} />
+          </Select>
+          <Select initValue={year} onValueChange={onYearChange}>
+            <Pagination items={yearsTable} />
+          </Select>
+        </div>
+      </header>
+      <DaysTable days={calendarTables[month].monthTable} onChange={onDayChange} />
     </article>
   )
 }

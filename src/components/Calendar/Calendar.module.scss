@@ -4,6 +4,12 @@
   align-items: center;
   margin: 500px;
 
+  .header {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+
   .navbar {
     display: flex;
     gap: 20px;
