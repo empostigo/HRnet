@@ -21,6 +21,7 @@ const Select = ({ initValue, children, onValueChange }) => {
 
   const setValue = (value) => {
     setButtonValue(value)
+    onValueChange(value)
     setDropdownState({ open: false })
   }
 
@@ -34,10 +35,10 @@ const Select = ({ initValue, children, onValueChange }) => {
 
     if (wrapper.current) setWrapperHeight(wrapper.current.offsetHeight)
 
-    onValueChange(buttonValue)
+    setButtonValue(initValue)
 
     return () => document.removeEventListener("mousedown", hasClickOutside)
-  }, [buttonValue, onValueChange])
+  }, [initValue])
 
   const childrenWithProps = React.Children.map(children, child => {
     if (React, isValidElement(child)) return React.cloneElement(child, { onChange: setValue })

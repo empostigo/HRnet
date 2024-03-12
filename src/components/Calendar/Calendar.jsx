@@ -61,6 +61,14 @@ const Calendar = ({ date }) => {
     setYear(year)
   }
 
+  const handleTodayButton = () => {
+    const today = new Date()
+
+    setMonth(today.getMonth())
+    setYear(today.getFullYear())
+    setDay(today.getDate())
+  }
+
   useEffect(() => {
     console.log(`${day}/${month + 1}/${year}`)
   }, [day, month, year])
@@ -68,7 +76,7 @@ const Calendar = ({ date }) => {
   return (
     <article className={calendarStyle.calendar}>
       <header className={calendarStyle.header}>
-        <button>
+        <button onClick={handleTodayButton}>
           <img />
         </button>
         <div className={calendarStyle.navbar}>

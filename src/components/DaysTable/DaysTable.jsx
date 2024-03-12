@@ -1,10 +1,15 @@
 // Style
 import { useState } from "react"
 import daysStyle from "./DaysTable.module.scss"
+import { getFirstDayOfTheMonth } from "../../utils/fillCalendar"
 
 const DaysTable = ({ days, onChange }) => {
   const nbDaysTable = 42
-  const [selectedIndex, setSelectedIndex] = useState(-1)
+
+  const today = new Date()
+  const todayDayIndex = days[days.indexOf(getFirstDayOfTheMonth(today)) + today.getDate() - 1]
+
+  const [selectedIndex, setSelectedIndex] = useState(todayDayIndex)
   const [isSelected, setIsSelected] = useState(Array(nbDaysTable).fill(false))
   const daysName = ["Sun.", "Mon.", "Tue.", "Wed.", "Thu.", "Fri", "Sat."].map(day => <th key={`${day}-${crypto.randomUUID()}`}>{day}</th>)
   const tableDays = () => {
