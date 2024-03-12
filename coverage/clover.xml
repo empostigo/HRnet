@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1708622524110" clover="3.2.0">
-  <project timestamp="1708622524110" name="All files">
-    <metrics statements="24" coveredstatements="24" conditionals="11" coveredconditionals="11" methods="4" coveredmethods="4" elements="39" coveredelements="39" complexity="0" loc="24" ncloc="24" packages="1" files="1" classes="1"/>
+<coverage generated="1710262827087" clover="3.2.0">
+  <project timestamp="1710262827087" name="All files">
+    <metrics statements="37" coveredstatements="37" conditionals="15" coveredconditionals="14" methods="5" coveredmethods="5" elements="57" coveredelements="56" complexity="0" loc="37" ncloc="37" packages="1" files="1" classes="1"/>
     <file name="fillCalendar.js" path="/home/mallow/Documents/Admin/FormationOpenclassrooms/Projets/Projet_14/HRnet/src/utils/fillCalendar.js">
-      <metrics statements="24" coveredstatements="24" conditionals="11" coveredconditionals="11" methods="4" coveredmethods="4"/>
+      <metrics statements="37" coveredstatements="37" conditionals="15" coveredconditionals="14" methods="5" coveredmethods="5"/>
       <line num="1" count="1" type="stmt"/>
-      <line num="2" count="1" type="stmt"/>
-      <line num="18" count="3" type="cond" truecount="5" falsecount="0"/>
+      <line num="2" count="3" type="stmt"/>
+      <line num="18" count="5" type="cond" truecount="5" falsecount="0"/>
       <line num="20" count="1" type="stmt"/>
-      <line num="22" count="15" type="cond" truecount="2" falsecount="0"/>
+      <line num="22" count="17" type="cond" truecount="2" falsecount="0"/>
       <line num="24" count="2" type="stmt"/>
       <line num="25" count="2" type="stmt"/>
       <line num="27" count="2" type="stmt"/>
@@ -28,6 +28,19 @@
       <line num="47" count="12" type="stmt"/>
       <line num="51" count="12" type="stmt"/>
       <line num="54" count="1" type="stmt"/>
+      <line num="57" count="1" type="stmt"/>
+      <line num="58" count="2" type="stmt"/>
+      <line num="59" count="2" type="stmt"/>
+      <line num="60" count="2" type="stmt"/>
+      <line num="62" count="2" type="stmt"/>
+      <line num="63" count="2" type="stmt"/>
+      <line num="65" count="2" type="cond" truecount="2" falsecount="0"/>
+      <line num="66" count="2" type="cond" truecount="1" falsecount="1"/>
+      <line num="67" count="6" type="stmt"/>
+      <line num="68" count="61" type="stmt"/>
+      <line num="69" count="2" type="stmt"/>
+      <line num="70" count="17" type="stmt"/>
+      <line num="72" count="2" type="stmt"/>
     </file>
   </project>
 </coverage>
