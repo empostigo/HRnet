@@ -9,6 +9,9 @@ import DaysTable from "../DaysTable/DaysTable"
 // Calendar filling function
 import createMonthsCalendars from "../../utils/fillCalendar"
 
+// Today button
+import todayButton from "../../assets/today.svg"
+
 // Style
 import calendarStyle from "./Calendar.module.scss"
 
@@ -43,6 +46,7 @@ const Calendar = () => {
       }
       yearsTable.push(i)
     }
+    yearsTable.push(null)
 
     return yearsTable
   }
@@ -73,8 +77,8 @@ const Calendar = () => {
   return (
     <article className={calendarStyle.calendar}>
       <header className={calendarStyle.header}>
-        <button onClick={handleTodayButton}>
-          <img />
+        <button onClick={handleTodayButton} className={calendarStyle.today}>
+          <img src={todayButton} alt="Today" className={calendarStyle.icon} />
         </button>
         <div className={calendarStyle.navbar}>
           <Select initValue={monthsList[month]} onValueChange={onMonthChange}>

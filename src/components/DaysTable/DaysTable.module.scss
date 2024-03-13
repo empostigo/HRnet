@@ -4,13 +4,14 @@
     padding: 7px;
     text-align: center;
     cursor: pointer;
+    border: 1px solid antiquewhite;
 
     &::hover {
       background-color: red;
     }
 
     &--selected {
-      background-color: beige;
+      background-color: lemonchiffon;
     }
   }
 }

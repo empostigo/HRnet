@@ -50,7 +50,7 @@ const Select = ({ initValue, children, onValueChange }) => {
     <div className={selectStyle.wrapper} ref={wrapper}>
       <button
         onClick={toggleDropdown}
-        className={selectStyle.button}><span className={selectStyle.text}>{buttonValue}</span>
+        className={selectStyle.select}><span className={selectStyle.text}>{buttonValue}</span>
         <img src={angleDown} alt="Open Dropdown" className={dropdownState.open ? selectStyle.hidden : ""} />
         <img src={angleUp} alt="Close Dropdown" className={!dropdownState.open ? selectStyle.hidden : ""} />
       </button>

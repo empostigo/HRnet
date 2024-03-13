@@ -6,7 +6,7 @@
   font-size: 14px;
   font-weight: 700;
 
-  .button {
+  .select {
     position: relative;
     display: flex;
     justify-content: space-between;
@@ -15,6 +15,7 @@
     font-size: inherit;
     font-weight: inherit;
     background-color: transparent;
+    color: inherit;
     border: none;
     cursor: pointer;
 

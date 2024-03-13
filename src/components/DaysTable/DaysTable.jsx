@@ -1,4 +1,6 @@
+// Calculation
 import { getFirstDayOfTheMonth } from "../../utils/fillCalendar"
+
 // Style
 import { useEffect, useState } from "react"
 import daysStyle from "./DaysTable.module.scss"
@@ -10,7 +12,7 @@ const DaysTable = ({ days, date, onChange }) => {
   const daysName = ["Sun.", "Mon.", "Tue.", "Wed.", "Thu.", "Fri", "Sat."].map(day => <th key={`${day}`}>{day}</th>)
   const tableDays = () => {
     let column = []
-    for (let i = 0; i <= days.length; i += 7) {
+    for (let i = 0; i < days.length; i += 7) {
       let tmpColumn = []
       for (let j = i; j <= i + 6; j++)
         tmpColumn.push(
