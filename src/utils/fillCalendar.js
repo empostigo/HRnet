@@ -54,25 +54,4 @@ const createMonthsCalendars = (year) => {
   return monthsArray
 }
 
-export const getMonthTable = (year, selectedMonth) => {
-  console.log(selectedMonth)
-  const NB_DAYS = 42
-  const months = getMonths(year)
-
-  const flatMonth = []
-  const firstDayOfTheMonth = getFirstDayOfTheMonth(new Date(year, selectedMonth, 1))
-
-  const nbOfPreviousDaysMonth = (months[selectedMonth].month === "January" ? 31 : months[selectedMonth - 1].days)
-  const firstDayOfMonthTable = nbOfPreviousDaysMonth - (firstDayOfTheMonth === 0 ? 7 : firstDayOfTheMonth) + 1
-  for (let i = firstDayOfMonthTable; i <= nbOfPreviousDaysMonth; i++) flatMonth.push(i)
-  for (let i = 1; i <= months[selectedMonth].days; i++) flatMonth.push(i)
-  const leftToFill = NB_DAYS - flatMonth.length
-  for (let i = 1; i <= leftToFill; i++) flatMonth.push(i)
-
-  return {
-    month: months[selectedMonth].month,
-    monthTable: flatMonth
-  }
-}
-
 export default createMonthsCalendars

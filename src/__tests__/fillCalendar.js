@@ -1,5 +1,4 @@
-import createMonthsCalendars from "../utils/fillCalendar"
-import { getFebruaryNbOfDays, getFirstDayOfTheMonth, getMonthTable } from "../utils/fillCalendar"
+import createMonthsCalendars, { getFebruaryNbOfDays, getFirstDayOfTheMonth } from "../utils/fillCalendar"
 
 describe("Given I select a month from the months array", () => {
   test("Then I get the number of days for this month", () => {
@@ -156,40 +155,5 @@ describe("Given I have a year", () => {
 
     const monthsArray = createMonthsCalendars(2024)
     expect(monthsArray).toEqual(testResult)
-  })
-})
-
-
-describe("Given I have a month and a year", () => {
-  test("Then I generate th corresponding month table", () => {
-    // 01-2024
-    const january2024 =
-    {
-      month: "January",
-      monthTable: [
-        31, 1, 2, 3, 4, 5, 6, 7, 8, 9,
-        10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
-        20, 21, 22, 23, 24, 25, 26, 27, 28, 29,
-        30, 31, 1, 2, 3, 4, 5, 6, 7, 8,
-        9, 10
-      ]
-    }
-
-    const januaryTable = getMonthTable(2024, 0)
-    expect(januaryTable).toEqual(january2024)
-
-    const november2024 = {
-      month: "November",
-      monthTable: [
-        27, 28, 29, 30, 31, 1, 2, 3, 4, 5,
-        6, 7, 8, 9, 10, 11, 12, 13, 14, 15,
-        16, 17, 18, 19, 20, 21, 22, 23, 24, 25,
-        26, 27, 28, 29, 30, 1, 2, 3, 4, 5,
-        6, 7
-      ]
-    }
-
-    const novemberTable = getMonthTable(2024, 10)
-    expect(novemberTable).toEqual(november2024)
   })
 })
