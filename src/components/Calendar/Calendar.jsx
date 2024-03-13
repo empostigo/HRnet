@@ -1,5 +1,5 @@
 // React
-import { useEffect, useState } from "react"
+import { useState } from "react"
 
 // Components
 import Select from "../Select/Select"
@@ -22,11 +22,15 @@ const MonthList = ({ list, onChange }) => {
   )
 }
 
-const Calendar = ({ date }) => {
-  const [year, setYear] = useState(date.getFullYear())
+const Calendar = () => {
+  const today = new Date()
+  const [date, setDate] = useState(today)
+  const [year, setYear] = useState(today.getFullYear())
+  const [month, setMonth] = useState(today.getMonth())
+  const [day, setDay] = useState(today.getDate())
 
-  const [month, setMonth] = useState(date.getMonth())
-  const [day, setDay] = useState(date.getDate())
+  const calendarTables = createMonthsCalendars(year)
+  const monthsList = calendarTables.map(item => item.month)
 
   const createYearTable = () => {
     const lastYear = Math.ceil(year / 10) * 10 - 1
@@ -45,9 +49,6 @@ const Calendar = ({ date }) => {
 
   const yearsTable = createYearTable()
 
-  const calendarTables = createMonthsCalendars(year)
-  const monthsList = calendarTables.map(item => item.month)
-
   const onDayChange = (day) => {
     setDay(day)
   }
@@ -62,16 +63,12 @@ const Calendar = ({ date }) => {
   }
 
   const handleTodayButton = () => {
-    const today = new Date()
-
     setMonth(today.getMonth())
     setYear(today.getFullYear())
     setDay(today.getDate())
-  }
 
-  useEffect(() => {
-    console.log(`${day}/${month + 1}/${year}`)
-  }, [day, month, year])
+    setDate(new Date())
+  }
 
   return (
     <article className={calendarStyle.calendar}>
@@ -88,7 +85,7 @@ const Calendar = ({ date }) => {
           </Select>
         </div>
       </header>
-      <DaysTable days={calendarTables[month].monthTable} onChange={onDayChange} />
+      <DaysTable days={calendarTables[month].monthTable} date={date} onChange={onDayChange} />
     </article>
   )
 }

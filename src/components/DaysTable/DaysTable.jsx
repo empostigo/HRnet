@@ -1,17 +1,13 @@
-// Style
-import { useState } from "react"
-import daysStyle from "./DaysTable.module.scss"
 import { getFirstDayOfTheMonth } from "../../utils/fillCalendar"
+// Style
+import { useEffect, useState } from "react"
+import daysStyle from "./DaysTable.module.scss"
 
-const DaysTable = ({ days, onChange }) => {
-  const nbDaysTable = 42
-
-  const today = new Date()
-  const todayDayIndex = days[days.indexOf(getFirstDayOfTheMonth(today)) + today.getDate() - 1]
-
+const DaysTable = ({ days, date, onChange }) => {
+  const todayDayIndex = days[days.indexOf(getFirstDayOfTheMonth(date) + date.getDate() - 1)];
   const [selectedIndex, setSelectedIndex] = useState(todayDayIndex)
-  const [isSelected, setIsSelected] = useState(Array(nbDaysTable).fill(false))
-  const daysName = ["Sun.", "Mon.", "Tue.", "Wed.", "Thu.", "Fri", "Sat."].map(day => <th key={`${day}-${crypto.randomUUID()}`}>{day}</th>)
+
+  const daysName = ["Sun.", "Mon.", "Tue.", "Wed.", "Thu.", "Fri", "Sat."].map(day => <th key={`${day}`}>{day}</th>)
   const tableDays = () => {
     let column = []
     for (let i = 0; i <= days.length; i += 7) {
@@ -19,10 +15,9 @@ const DaysTable = ({ days, onChange }) => {
       for (let j = i; j <= i + 6; j++)
         tmpColumn.push(
           <td
-            key={`${i}-${j}-${crypto.randomUUID()}`}
+            key={`${i}-${j}`}
             className={`${daysStyle.day} ${j === selectedIndex ? daysStyle["day--selected"] : ""}`}
             onClick={() => {
-              setIsSelected(previousState => previousState.map((day, index) => j === index ? true : day))
               setSelectedIndex(j)
               onChange(days[j])
             }}
@@ -36,6 +31,10 @@ const DaysTable = ({ days, onChange }) => {
 
     return column
   }
+
+  useEffect(() => {
+    setSelectedIndex(todayDayIndex)
+  }, [date])
 
   return (
     <table className={daysStyle.wrapper}>

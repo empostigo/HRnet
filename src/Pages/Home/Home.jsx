@@ -15,7 +15,7 @@ const Home = () => {
 
   return (
     <>
-      < Calendar date={new Date()} />
+      < Calendar />
       <Select initValue={value} onValueChange={onValueChange}>
         <UList list={test} />
       </Select>
