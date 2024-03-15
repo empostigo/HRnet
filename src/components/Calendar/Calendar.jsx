@@ -1,5 +1,5 @@
 // React
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 // Components
 import Select from "../Select/Select"
@@ -25,7 +25,7 @@ const MonthList = ({ list, onChange }) => {
   )
 }
 
-const Calendar = () => {
+const Calendar = ({ inputId, onDateSelect }) => {
   const today = new Date()
   const [date, setDate] = useState(today)
   const [year, setYear] = useState(today.getFullYear())
@@ -53,8 +53,16 @@ const Calendar = () => {
 
   const yearsTable = createYearTable()
 
+  const formatField = field =>
+    field.toString().length === 1 ? `0${field}` : field
+
   const onDayChange = (day) => {
     setDay(day)
+
+    const newDate = `${formatField(day)}/${formatField(month + 1)}/${year}`
+    setDate(newDate)
+    document.getElementById(inputId).value = newDate
+    onDateSelect(newDate)
   }
 
   const onMonthChange = (month) => {
@@ -71,7 +79,10 @@ const Calendar = () => {
     setYear(today.getFullYear())
     setDay(today.getDate())
 
-    setDate(new Date())
+    const newDate = `${formatField(day)}/${formatField(month + 1)}/${year}`
+    setDate(newDate)
+    document.getElementById(inputId).value = newDate
+    onDateSelect(newDate)
   }
 
   return (

@@ -1,11 +1,11 @@
 // Components
 import { useState } from "react"
-import Calendar from "../../components/Calendar/Calendar"
 import Select from "../../components/Select/Select"
 import UList from "../../components/UList/UList"
 
 // Style
 import homeStyle from "./Home.module.scss"
+import DatePicker from "../../components/DatePicker/DatePicker"
 
 const Home = () => {
   const [value, setValue] = useState(0)
@@ -18,7 +18,7 @@ const Home = () => {
 
   return (
     <main className={homeStyle.main}>
-      < Calendar />
+      <DatePicker name="birthDate" />
       <Select initValue={value} onValueChange={onValueChange}>
         <UList list={test} />
       </Select>
