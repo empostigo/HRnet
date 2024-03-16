@@ -41,7 +41,9 @@ const DatePicker = ({ name }) => {
     setShowReset(inputRef.current && inputRef.current.value !== "")
 
     document.addEventListener("mousedown", hasClickOutside)
-    return () => document.removeEventListener("mousedown", hasClickOutside)
+    return () =>
+      document.removeEventListener("mousedown", hasClickOutside)
+
   })
 
   return (

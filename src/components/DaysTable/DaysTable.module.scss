@@ -4,15 +4,13 @@
     padding: 7px;
     text-align: center;
     cursor: pointer;
-    border: 1px solid antiquewhite;
+    border: 1px solid #ecf8f8;
     transform: scale(1);
     transition: transform 300ms ease-in-out;
-    ;
 
     &:hover {
       background-color: wheat;
       transform: scale(1.2);
-
     }
 
     &--selected {
