@@ -12,13 +12,19 @@ import datePickerStyle from "./DatePicker.module.scss"
 
 const DatePicker = ({ name }) => {
   const [isCalendarVisible, setCalendarVisibility] = useState(false)
+  const [selectedDate, setSelectedDate] = useState(null)
   const [showReset, setShowReset] = useState(false)
 
   const inputRef = useRef(null)
   const calendarRef = useRef(null)
 
-  const handleDateSelect = () => {
+  const handleDateSelect = (date) => {
+    setSelectedDate(date)
     setCalendarVisibility(false)
+    if (inputRef.current) {
+      inputRef.current.value = date
+      setShowReset(true)
+    }
   }
 
   const toggleCalendar = () => {
