@@ -21,7 +21,6 @@
     border: none;
     background-color: transparent;
     cursor: pointer;
-
   }
 
   .icon {
@@ -31,6 +30,10 @@
   .navbar {
     display: flex;
     gap: 20px;
+  }
+
+  button {
+    border: none;
   }
 
   ul {

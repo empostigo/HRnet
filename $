@@ -20,7 +20,7 @@ const DatePicker = ({ name, label }) => {
 
   const handleDateSelect = (date) => {
     setSelectedDate(date)
-    setCalendarVisibility(false)
+    setCalendarVisibility(!isCalendarVisible)
     if (inputRef.current) {
       inputRef.current.value = date
       setShowReset(true)
@@ -39,7 +39,7 @@ const DatePicker = ({ name, label }) => {
   }
 
   const hasClickOutside = (event) => {
-    if (calendarRef.current && !calendarRef.current.contains(event.target) && !inputRef.current.contains(event.target))
+    if (calendarRef.current && !calendarRef.current.contains(event.target))
       setCalendarVisibility(false)
   }
 
@@ -55,7 +55,7 @@ const DatePicker = ({ name, label }) => {
   return (
     <article className={datePickerStyle.container}>
       <div className={datePickerStyle.input}>
-        <label htmlFor={name}>{label}</label>
+        <label for={name}>{label}</label>
         <input
           id={name}
           type="text"
