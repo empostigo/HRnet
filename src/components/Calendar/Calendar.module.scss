@@ -7,6 +7,7 @@
   background-color: #001011;
   color: #daa520;
   padding: 1em;
+  border-radius: 5px;
 
   .header {
     display: flex;
@@ -33,7 +34,7 @@
   }
 
   button {
-    border: none;
+    border: none !important;
   }
 
   ul {
@@ -43,7 +44,7 @@
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(4, 1fr);
     gap: 1em;
-    background-color: beige;
+    background-color: #001011;
     border: 1px solid beige;
     border-radius: 5px;
     margin: 0;
