@@ -10,7 +10,7 @@ import resetField from "../../assets/xmark.svg"
 // Style
 import datePickerStyle from "./DatePicker.module.scss"
 
-const DatePicker = ({ name, label }) => {
+const DatePicker = ({ name, label, onDateChange }) => {
   const [isCalendarVisible, setCalendarVisibility] = useState(false)
   const [selectedDate, setSelectedDate] = useState(null)
   const [showReset, setShowReset] = useState(false)
@@ -21,6 +21,7 @@ const DatePicker = ({ name, label }) => {
   const handleDateSelect = (date) => {
     setSelectedDate(date)
     setCalendarVisibility(false)
+    onDateChange(selectedDate)
     if (inputRef.current) {
       inputRef.current.value = date
       setShowReset(true)
@@ -33,9 +34,11 @@ const DatePicker = ({ name, label }) => {
 
   const resetInput = () => {
     if (inputRef.current) {
-      inputRef.current.value = null
+      inputRef.current.value = ""
       setShowReset(false)
     }
+    setSelectedDate("")
+    onDateChange(null)
   }
 
   const hasClickOutside = (event) => {
@@ -50,7 +53,7 @@ const DatePicker = ({ name, label }) => {
     return () =>
       document.removeEventListener("mousedown", hasClickOutside)
 
-  })
+  }, [])
 
   return (
     <article className={datePickerStyle.container}>
