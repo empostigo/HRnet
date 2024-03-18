@@ -65,6 +65,7 @@ const DatePicker = ({ name, label, onDateChange }) => {
           onClick={toggleCalendar}
           ref={inputRef}
           className={datePickerStyle.input}
+          required
         />
         {showReset &&
           <button onClick={resetInput} className={datePickerStyle.reset}>

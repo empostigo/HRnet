@@ -35,8 +35,6 @@ const Home = () => {
 
   const { register, reset, handleSubmit } = useForm()
   const submitForm = data => {
-    if (!data || !state || !department || !selectedStartDate || !selectedStartDate)
-      return
     const employee = {}
     for (const [key, value] of Object.entries(data)) employee[key] = value
     employee["birthdate"] = selectedBirthDate
@@ -80,10 +78,10 @@ const Home = () => {
         <h2>Create Employee</h2>
         <form action="#" id="create-employee" className={homeStyle.form} onSubmit={handleSubmit(submitForm)}>
           <label htmlFor="first-name">First Name</label>
-          <input type="text" id="first-name" {...register("firstname")} />
+          <input type="text" id="first-name" {...register("firstname")} autoComplete="true" required />
 
           <label htmlFor="last-name">Last Name</label>
-          <input type="text" id="last-name" {...register("lastname")} />
+          <input type="text" id="last-name" {...register("lastname")} autoComplete="true" required />
 
           <DatePicker name="birthDatePicker" label="Date of Birth" onDateChange={onBirthDateChange} />
           <DatePicker name="startDatePicker" label="Start Date" onDateChange={onStartDateChange} />
@@ -92,22 +90,22 @@ const Home = () => {
             <legend>Address</legend>
 
             <label htmlFor="street">Street</label>
-            <input id="street" type="text" {...register("street")} />
+            <input id="street" type="text" autoComplete="true" {...register("street")} required />
 
             <label htmlFor="city">City</label>
-            <input id="city" type="text" {...register("city")} />
+            <input id="city" type="text" autoComplete="true" {...register("city")} required />
 
             <label htmlFor="state">State</label>
-            <Select initValue={state} onValueChange={onStateChange}>
+            <Select initValue={state} id={"state"} onValueChange={onStateChange}>
               <UList list={states.map(state => state.name)} />
             </Select>
 
             <label htmlFor="zip-code">Zip Code</label>
-            <input id="zip-code" type="number" {...register("zipCode")} />
+            <input id="zip-code" type="number" autoComplete="true" {...register("zipCode")} required />
           </fieldset>
 
           <label htmlFor="department">Department</label>
-          <Select initValue={department} onValueChange={onDepartmentChange}>
+          <Select initValue={department} id={"department"} onValueChange={onDepartmentChange}>
             <UList list={departments} />
           </Select>
           <input type="submit" />

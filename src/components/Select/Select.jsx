@@ -8,7 +8,7 @@ import angleUp from "../../assets/arrows/angle-up.svg"
 // Styles
 import selectStyle from "./Select.module.scss"
 
-const Select = ({ initValue, children, onValueChange }) => {
+const Select = ({ initValue, children, id, onValueChange }) => {
 
   const [dropdownState, setDropdownState] = useState({ open: false })
   const [buttonValue, setButtonValue] = useState(initValue)
@@ -51,7 +51,10 @@ const Select = ({ initValue, children, onValueChange }) => {
       <button
         onClick={toggleDropdown}
         type="button"
-        className={selectStyle.select}><span className={selectStyle.text}>{buttonValue}</span>
+        className={selectStyle.select}
+        id={id}
+      >
+        <span className={selectStyle.text}>{buttonValue}</span>
         <img src={angleDown} alt="Open Dropdown" className={dropdownState.open ? selectStyle.hidden : ""} />
         <img src={angleUp} alt="Close Dropdown" className={!dropdownState.open ? selectStyle.hidden : ""} />
       </button>
