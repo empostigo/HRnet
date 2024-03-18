@@ -17,9 +17,16 @@ import { states } from "../../data/states"
 
 // Style
 import homeStyle from "./Home.module.scss"
+import Modal from "../../components/Modal/Modal"
 
 const Home = () => {
   const departments = ["Sales", "Marketing", "Engineering", "Human Resources", "Legal"]
+
+  const [hidden, setHidden] = useState(true)
+  const closeModal = () => {
+    setHidden(true)
+    location.reload()
+  }
 
   const [state, setState] = useState(states[0].name)
   const [department, setDepartment] = useState(departments[0])
@@ -28,6 +35,8 @@ const Home = () => {
 
   const { register, reset, handleSubmit } = useForm()
   const submitForm = data => {
+    if (!data || !state || !department || !selectedStartDate || !selectedStartDate)
+      return
     const employee = {}
     for (const [key, value] of Object.entries(data)) employee[key] = value
     employee["birthdate"] = selectedBirthDate
@@ -43,6 +52,8 @@ const Home = () => {
     setSelectedStartDate(null)
     setState(states[0].name)
     setDepartment(departments[0])
+
+    setHidden(false)
   }
 
   const onStateChange = state => {
@@ -101,6 +112,10 @@ const Home = () => {
           </Select>
           <input type="submit" />
         </form>
+        {
+          !hidden &&
+          <Modal message={"Employee Created!"} closeModal={closeModal} />
+        }
       </main>
     </>
   )
