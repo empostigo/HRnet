@@ -37,7 +37,7 @@ const Home = () => {
   const submitForm = data => {
     const employee = {}
     for (const [key, value] of Object.entries(data)) employee[key] = value
-    employee["birthdate"] = selectedBirthDate
+    employee["birthDate"] = selectedBirthDate
     employee["startDate"] = selectedStartDate
     employee["state"] = state
     employee["department"] = department
