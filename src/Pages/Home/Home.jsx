@@ -42,7 +42,9 @@ const Home = () => {
     employee["state"] = state
     employee["department"] = department
 
-    localStorage.setItem(`employee-${localStorage.length + 1}`, JSON.stringify(employee))
+    const employees = JSON.parse(localStorage.getItem("employees")) || []
+    employees.push(employee)
+    localStorage.setItem("employees", JSON.stringify(employees))
 
     reset()
 
