@@ -11,16 +11,6 @@ import disabledDownCaret from "../../assets/carets/caret-down-grey.svg"
 import sortingHeaderStyle from "./SortingHeader.module.scss"
 
 const SortingHeader = ({ text, sortingItem }) => {
-  // const [isUsed, setIsUsed] = useState({ up: up, down: down })
-
-  /*
-  const enableSorting = () => {
-    setIsUsed({
-      ...isUsed,
-      up: true
-    })
-  }
-  */
 
   return (
     <div className={sortingHeaderStyle.wrapper}>

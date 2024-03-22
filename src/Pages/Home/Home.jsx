@@ -7,6 +7,10 @@ import { Link } from "react-router-dom"
 // React Hook Form
 import { useForm } from "react-hook-form"
 
+// RTK / React Redux
+import { useDispatch } from "react-redux"
+import { addEmployee } from "../../features/employees/employeesSlice"
+
 // Components
 import Select from "../../components/Select/Select"
 import UList from "../../components/UList/UList"
@@ -25,7 +29,7 @@ const Home = () => {
   const [hidden, setHidden] = useState(true)
   const closeModal = () => {
     setHidden(true)
-    location.reload()
+    // location.reload()
   }
 
   const [state, setState] = useState(states[0].name)
@@ -33,6 +37,7 @@ const Home = () => {
   const [selectedBirthDate, setSelectedBirthDate] = useState(null)
   const [selectedStartDate, setSelectedStartDate] = useState(null)
 
+  const dispatch = useDispatch()
   const { register, reset, handleSubmit } = useForm()
   const submitForm = data => {
     const employee = {}
@@ -41,10 +46,14 @@ const Home = () => {
     employee["startDate"] = selectedStartDate
     employee["state"] = state
     employee["department"] = department
-
+    console.log('Dispatching addEmployee with:', employee);
+    dispatch(addEmployee(employee))
+    /*
     const employees = JSON.parse(localStorage.getItem("employees")) || []
     employees.push(employee)
     localStorage.setItem("employees", JSON.stringify(employees))
+    */
+
 
     reset()
 
