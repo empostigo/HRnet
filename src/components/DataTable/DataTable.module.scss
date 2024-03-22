@@ -3,6 +3,7 @@
   justify-content: space-between;
   gap: 0.33em;
   width: 60%;
+  margin-bottom: 1em;
 
   .header {
     display: flex;
@@ -25,5 +26,28 @@
     display: flex;
     justify-content: space-between;
     gap: 0.33em;
+  }
+}
+
+.table {
+  border-spacing: 0;
+  border-collapse: separate;
+
+  .theaders {
+    margin-bottom: 1em;
+  }
+
+  .row {
+    background-color: #f9f9f9;
+  }
+
+  .data {
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    padding: 8px 10px;
+
+    &Firstname {
+      background-color: #f1f1f1;
+    }
   }
 }

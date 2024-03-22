@@ -48,6 +48,7 @@ const DatePicker = ({ name, label, onDateChange }) => {
 
   useEffect(() => {
     setShowReset(inputRef.current && inputRef.current.value !== "")
+    if (!showReset) resetInput()
 
     document.addEventListener("mousedown", hasClickOutside)
     return () =>
@@ -67,11 +68,11 @@ const DatePicker = ({ name, label, onDateChange }) => {
           className={datePickerStyle.input}
           required
         />
-        {showReset &&
+        {showReset && (
           <button onClick={resetInput} className={datePickerStyle.reset}>
             <img src={resetField} alt="Reset input" className={datePickerStyle.xmark} />
           </button>
-        }
+        )}
       </div>
       {isCalendarVisible && (
         <div ref={calendarRef} className={datePickerStyle.calendarWrapper}>

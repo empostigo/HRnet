@@ -1,6 +1,3 @@
-// React
-import { useState } from "react"
-
 // Assets
 import upCaret from "../../assets/carets/caret-up.svg"
 import disabledUpCaret from "../../assets/carets/caret-up-grey.svg"

@@ -29,7 +29,6 @@ const Home = () => {
   const [hidden, setHidden] = useState(true)
   const closeModal = () => {
     setHidden(true)
-    // location.reload()
   }
 
   const [state, setState] = useState(states[0].name)
@@ -46,14 +45,7 @@ const Home = () => {
     employee["startDate"] = selectedStartDate
     employee["state"] = state
     employee["department"] = department
-    console.log('Dispatching addEmployee with:', employee);
     dispatch(addEmployee(employee))
-    /*
-    const employees = JSON.parse(localStorage.getItem("employees")) || []
-    employees.push(employee)
-    localStorage.setItem("employees", JSON.stringify(employees))
-    */
-
 
     reset()
 

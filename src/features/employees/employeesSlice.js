@@ -13,5 +13,8 @@ export const employeesSlice = createSlice({
   },
 })
 
+// Selector
+export const selectEmployees = state => state.employees.list
+
 export const { addEmployee } = employeesSlice.actions
 export default employeesSlice.reducer

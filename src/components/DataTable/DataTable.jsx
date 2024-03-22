@@ -1,5 +1,11 @@
-// Components
+// React
 import { useState } from "react"
+
+// React Redux
+import { useSelector } from "react-redux"
+import { selectEmployees } from "../../features/employees/employeesSlice"
+
+// Components
 import Select from "../../components/Select/Select"
 import UList from "../UList/UList"
 import SortingHeader from "../SortingHeader/SortingHeader"
@@ -8,6 +14,25 @@ import SortingHeader from "../SortingHeader/SortingHeader"
 import dataTableStyle from "./DataTable.module.scss"
 
 const DataTable = () => {
+  /*
+          {
+            employees.map(employee =>
+              <tr className={dataTableStyle.data}>
+                <td className={dataTableStyle.data} key={crypto.randomUUID()}>{employee.firstname}Emmanuel</td>
+                <td className={dataTableStyle.data} key={crypto.randomUUID()}>{employee.lastname}Postigo</td>
+                <td className={dataTableStyle.data} key={crypto.randomUUID()}>{employee.startDate}03/22/2024</td>
+                <td className={dataTableStyle.data} key={crypto.randomUUID()}>{employee.department}Sales</td>
+                <td className={dataTableStyle.data} key={crypto.randomUUID()}>{employee.birthDate}09/14/1978</td>
+                <td className={dataTableStyle.data} key={crypto.randomUUID()}>{employee.street}Papin</td>
+                <td className={dataTableStyle.data} key={crypto.randomUUID()}>{employee.city}Valence</td>
+                <td className={dataTableStyle.data} key={crypto.randomUUID()}>{employee.state}California</td>
+                <td className={dataTableStyle.data} key={crypto.randomUUID()}>{employee.zipCode}26000</td>
+              </tr>
+            )
+          }
+  */
+
+  const employees = useSelector(selectEmployees)
   const nbEntries = ["10", "25", "50", "100"]
   const [sorting, setSorting] = useState([
     {
@@ -96,10 +121,21 @@ const DataTable = () => {
       </div>
       <table className={dataTableStyle.table}>
         <tbody className={dataTableStyle.tbody}>
-          <tr className={dataTableStyle.headers}>
+          <tr className={dataTableStyle.theaders}>
             {
-              sorting.map(header => <th key={header.text} onClick={() => onSortingUsed(header)}><SortingHeader text={header.text} sortingItem={header} /></th>)
+              sorting.map(header => <th key={header.text} onClick={() => onSortingUsed(header)}><SortingHeader key={crypto.randomUUID()} text={header.text} sortingItem={header} /></th>)
             }
+          </tr>
+          <tr className={dataTableStyle.row}>
+            <td className={`${dataTableStyle.data} ${dataTableStyle.dataFirstname}`}>Emmanuel</td>
+            <td className={dataTableStyle.data}>Postigo</td>
+            <td className={dataTableStyle.data}>03/22/2024</td>
+            <td className={dataTableStyle.data}>Sales</td>
+            <td className={dataTableStyle.data}>09/14/1978</td>
+            <td className={dataTableStyle.data}>Papin</td>
+            <td className={dataTableStyle.data}>Valence</td>
+            <td className={dataTableStyle.data}>California</td>
+            <td className={dataTableStyle.data}>26000</td>
           </tr>
         </tbody>
       </table>
