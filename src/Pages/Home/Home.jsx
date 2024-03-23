@@ -29,7 +29,10 @@ const Home = () => {
   const [hidden, setHidden] = useState(true)
   const closeModal = () => {
     setHidden(true)
+    setFormSubmitted(false)
   }
+
+  const [formSubmitted, setFormSubmitted] = useState(false)
 
   const [state, setState] = useState(states[0].name)
   const [department, setDepartment] = useState(departments[0])
@@ -55,6 +58,7 @@ const Home = () => {
     setDepartment(departments[0])
 
     setHidden(false)
+    setFormSubmitted(true)
   }
 
   const onStateChange = state => {
@@ -86,8 +90,8 @@ const Home = () => {
           <label htmlFor="last-name">Last Name</label>
           <input type="text" id="last-name" {...register("lastname")} autoComplete="true" required />
 
-          <DatePicker name="birthDatePicker" label="Date of Birth" onDateChange={onBirthDateChange} />
-          <DatePicker name="startDatePicker" label="Start Date" onDateChange={onStartDateChange} />
+          <DatePicker name="birthDatePicker" label="Date of Birth" formSubmitted={formSubmitted} onDateChange={onBirthDateChange} />
+          <DatePicker name="startDatePicker" label="Start Date" formSubmitted={formSubmitted} onDateChange={onStartDateChange} />
 
           <fieldset className={homeStyle.fieldset}>
             <legend>Address</legend>

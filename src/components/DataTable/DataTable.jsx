@@ -123,8 +123,14 @@ const DataTable = () => {
         <tbody className={dataTableStyle.tbody}>
           <tr className={dataTableStyle.theaders}>
             {
-              sorting.map(header => <th key={header.text} onClick={() => onSortingUsed(header)}><SortingHeader key={crypto.randomUUID()} text={header.text} sortingItem={header} /></th>)
-            }
+              sorting.map(header =>
+                <th
+                  key={header.text}
+                  onClick={() => onSortingUsed(header)}
+                >
+                  <SortingHeader key={crypto.randomUUID()} text={header.text} sortingItem={header} />
+                </th>
+              )}
           </tr>
           <tr className={dataTableStyle.row}>
             <td className={`${dataTableStyle.data} ${dataTableStyle.dataFirstname}`}>Emmanuel</td>
