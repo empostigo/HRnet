@@ -35,7 +35,7 @@ const Calendar = ({ inputId, selectedDate, onDateSelect }) => {
   const calendarTables = createMonthsCalendars(year)
   const monthsList = calendarTables.map(item => item.month)
 
-  const createYearTable = () => {
+  const createYearTable = (year) => {
     const lastYear = Math.ceil(year / 10) * 10 - 1
     const yearsTable = []
     for (let i = 1900; i <= lastYear; i++) {
@@ -51,17 +51,15 @@ const Calendar = ({ inputId, selectedDate, onDateSelect }) => {
     return yearsTable
   }
 
-  const yearsTable = createYearTable()
+  const yearsTable = createYearTable(2024)
 
   const formatField = field =>
     field.toString().length === 1 ? `0${field}` : field
 
   const onDayChange = (day) => {
-    setDay(day.day)
+    setDay(day)
 
-    const selectedMonth = month + day.month
-
-    const newDate = `${formatField(selectedMonth)}/${formatField(day.day)}/${year}`
+    const newDate = `${formatField(month + 1)}/${formatField(day)}/${year}`
     document.getElementById(inputId).value = newDate
     onDateSelect(newDate)
   }
@@ -101,7 +99,7 @@ const Calendar = ({ inputId, selectedDate, onDateSelect }) => {
           </Select>
         </div>
       </header>
-      <DaysTable days={calendarTables[month].monthTable} date={selectedDate} onChange={onDayChange} />
+      <DaysTable days={calendarTables[month]} date={selectedDate} onChange={onDayChange} />
     </article>
   )
 }
