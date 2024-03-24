@@ -1,10 +1,13 @@
 // RTK
 import { createSlice } from "@reduxjs/toolkit"
 
+// Mocked data
+import data from "../../__mocks__/mockData"
+
 export const employeesSlice = createSlice({
   name: "employees",
   initialState: {
-    list: []
+    list: data
   },
   reducers: {
     addEmployee: (state, action) => {

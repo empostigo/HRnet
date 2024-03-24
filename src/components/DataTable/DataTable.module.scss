@@ -2,7 +2,7 @@
   display: flex;
   justify-content: space-between;
   gap: 0.33em;
-  width: 60%;
+  width: 80%;
   margin-bottom: 1em;
 
   .header {
@@ -11,13 +11,17 @@
     width: 100%;
 
     button {
-      border: none;
+      font-weight: 400;
+      border: 2px solid #d6d6d6;
+      border-radius: 5px;
+      padding: 0;
     }
   }
 
   .entries {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     gap: 0.33em;
     width: max-content;
   }
@@ -32,6 +36,7 @@
 .table {
   border-spacing: 0;
   border-collapse: separate;
+  width: 90%;
 
   .theaders {
     margin-bottom: 1em;

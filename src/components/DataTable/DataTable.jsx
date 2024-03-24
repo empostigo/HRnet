@@ -1,5 +1,5 @@
 // React
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 // React Redux
 import { useSelector } from "react-redux"
@@ -14,26 +14,29 @@ import SortingHeader from "../SortingHeader/SortingHeader"
 import dataTableStyle from "./DataTable.module.scss"
 
 const DataTable = () => {
-  /*
-          {
-            employees.map(employee =>
-              <tr className={dataTableStyle.data}>
-                <td className={dataTableStyle.data} key={crypto.randomUUID()}>{employee.firstname}Emmanuel</td>
-                <td className={dataTableStyle.data} key={crypto.randomUUID()}>{employee.lastname}Postigo</td>
-                <td className={dataTableStyle.data} key={crypto.randomUUID()}>{employee.startDate}03/22/2024</td>
-                <td className={dataTableStyle.data} key={crypto.randomUUID()}>{employee.department}Sales</td>
-                <td className={dataTableStyle.data} key={crypto.randomUUID()}>{employee.birthDate}09/14/1978</td>
-                <td className={dataTableStyle.data} key={crypto.randomUUID()}>{employee.street}Papin</td>
-                <td className={dataTableStyle.data} key={crypto.randomUUID()}>{employee.city}Valence</td>
-                <td className={dataTableStyle.data} key={crypto.randomUUID()}>{employee.state}California</td>
-                <td className={dataTableStyle.data} key={crypto.randomUUID()}>{employee.zipCode}26000</td>
-              </tr>
-            )
-          }
-  */
+  const nbEntries = [10, 25, 50, 100]
+  const [entries, setEntries] = useState(nbEntries[0])
+  const onNbEntriesChange = (nbEntries) => {
+    setEntries(nbEntries)
+  }
+
 
   const employees = useSelector(selectEmployees)
-  const nbEntries = ["10", "25", "50", "100"]
+  const nbEmployees = employees.length
+  const employeeFields = ["firstname", "lastname", "startDate", "department", "birthDate", "street", "city", "state", "zipCode"]
+  const employeesData = employees.map((employee, index) => {
+    const employeeData = employeeFields.map(field =>
+      <td className={`${dataTableStyle.data} ${field === "firstname" ? dataTableStyle["dataFirstname"] : ""}`} key={`${field}- ${index}`}>{employee[field]}</td>)
+    return <tr className={dataTableStyle.row} key={index}>{employeeData}</tr>
+  })
+
+  const getEmployeesPage = (pageNumber, nbShownEmployees) => {
+    const startIndex = (pageNumber - 1) * nbShownEmployees
+    const endIndex = startIndex + nbShownEmployees
+
+    return employeesData.slice(startIndex, endIndex)
+  }
+
   const [sorting, setSorting] = useState([
     {
       text: "First Name",
@@ -97,11 +100,6 @@ const DataTable = () => {
     )
   }
 
-  const [entries, setEntries] = useState(nbEntries[0])
-  const onNbEntriesChange = (nbEntries) => {
-    setEntries(nbEntries)
-  }
-
   return (
     <>
       <div className={dataTableStyle.container}>
@@ -117,8 +115,8 @@ const DataTable = () => {
             <label htmlFor="searchField">Search:</label>
             <input id="searchField" name="searchField" type="text" />
           </div>
-        </header>
-      </div>
+        </header >
+      </div >
       <table className={dataTableStyle.table}>
         <tbody className={dataTableStyle.tbody}>
           <tr className={dataTableStyle.theaders}>
@@ -132,19 +130,14 @@ const DataTable = () => {
                 </th>
               )}
           </tr>
-          <tr className={dataTableStyle.row}>
-            <td className={`${dataTableStyle.data} ${dataTableStyle.dataFirstname}`}>Emmanuel</td>
-            <td className={dataTableStyle.data}>Postigo</td>
-            <td className={dataTableStyle.data}>03/22/2024</td>
-            <td className={dataTableStyle.data}>Sales</td>
-            <td className={dataTableStyle.data}>09/14/1978</td>
-            <td className={dataTableStyle.data}>Papin</td>
-            <td className={dataTableStyle.data}>Valence</td>
-            <td className={dataTableStyle.data}>California</td>
-            <td className={dataTableStyle.data}>26000</td>
-          </tr>
+          {
+            getEmployeesPage(1, entries)
+          }
         </tbody>
       </table>
+      <div className={dataTableStyle.footer}>
+        <p>{`Showing of ${nbEmployees} ${nbEmployees > 1 ? "entries" : "entry"}`}</p>
+      </div>
     </>
   )
 }
