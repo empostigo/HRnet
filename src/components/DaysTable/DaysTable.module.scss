@@ -16,5 +16,12 @@
     &--selected {
       background-color: lemonchiffon;
     }
+
+    &--disable {
+      cursor: none;
+      pointer-events: none;
+      opacity: 0.5;
+      transform: none;
+    }
   }
 }

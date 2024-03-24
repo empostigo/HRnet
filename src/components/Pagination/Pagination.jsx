@@ -38,7 +38,7 @@ const Pagination = ({ items, itemsPerPage = 12, onChange }) => {
       container.removeEventListener("wheel", handleWheel)
       container.removeEventListener("keydown", handleKeyDown)
     }
-  }, [totalPages])
+  }, [])
 
   const startIndex = (currentPage - 1) * itemsPerPage
   const endIndex = startIndex + itemsPerPage

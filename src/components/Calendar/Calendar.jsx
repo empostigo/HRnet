@@ -7,7 +7,7 @@ import Pagination from "../Pagination/Pagination"
 import DaysTable from "../DaysTable/DaysTable"
 
 // Calendar filling function
-import createMonthsCalendars from "../../utils/fillCalendar"
+import createMonthsCalendars, { standardDate } from "../../utils/fillCalendar"
 
 // Today button
 import todayButton from "../../assets/today.svg"
@@ -25,12 +25,12 @@ const MonthList = ({ list, onChange }) => {
   )
 }
 
-const Calendar = ({ inputId, onDateSelect }) => {
-  const today = new Date()
-  const [date, setDate] = useState(today)
-  const [year, setYear] = useState(today.getFullYear())
-  const [month, setMonth] = useState(today.getMonth())
-  const [day, setDay] = useState(today.getDate())
+const Calendar = ({ inputId, selectedDate, onDateSelect }) => {
+  const usableDate = standardDate(selectedDate)
+
+  const [year, setYear] = useState(usableDate.getFullYear())
+  const [month, setMonth] = useState(usableDate.getMonth())
+  const [day, setDay] = useState(usableDate.getDate())
 
   const calendarTables = createMonthsCalendars(year)
   const monthsList = calendarTables.map(item => item.month)
@@ -57,10 +57,11 @@ const Calendar = ({ inputId, onDateSelect }) => {
     field.toString().length === 1 ? `0${field}` : field
 
   const onDayChange = (day) => {
-    setDay(day)
+    setDay(day.day)
 
-    const newDate = `${formatField(day)}/${formatField(month + 1)}/${year}`
-    setDate(newDate)
+    const selectedMonth = month + day.month
+
+    const newDate = `${formatField(selectedMonth)}/${formatField(day.day)}/${year}`
     document.getElementById(inputId).value = newDate
     onDateSelect(newDate)
   }
@@ -75,12 +76,12 @@ const Calendar = ({ inputId, onDateSelect }) => {
   }
 
   const handleTodayButton = () => {
+    const today = new Date()
     setMonth(today.getMonth())
     setYear(today.getFullYear())
     setDay(today.getDate())
 
-    const newDate = `${formatField(day)}/${formatField(month + 1)}/${year}`
-    setDate(newDate)
+    const newDate = `${formatField(month + 1)}/${formatField(day)}/${year}`
     document.getElementById(inputId).value = newDate
     onDateSelect(newDate)
   }
@@ -88,19 +89,19 @@ const Calendar = ({ inputId, onDateSelect }) => {
   return (
     <article className={calendarStyle.calendar}>
       <header className={calendarStyle.header}>
-        <button onClick={handleTodayButton} className={calendarStyle.today}>
+        <button type="button" onClick={handleTodayButton} className={calendarStyle.today}>
           <img src={todayButton} alt="Today" className={calendarStyle.icon} />
         </button>
         <div className={calendarStyle.navbar}>
-          <Select initValue={monthsList[month]} onValueChange={onMonthChange}>
+          <Select initValue={monthsList[usableDate.getMonth()]} onValueChange={onMonthChange}>
             <MonthList list={monthsList} />
           </Select>
-          <Select initValue={year} onValueChange={onYearChange}>
+          <Select initValue={usableDate.getFullYear()} onValueChange={onYearChange}>
             <Pagination items={yearsTable} />
           </Select>
         </div>
       </header>
-      <DaysTable days={calendarTables[month].monthTable} date={date} onChange={onDayChange} />
+      <DaysTable days={calendarTables[month].monthTable} date={selectedDate} onChange={onDayChange} />
     </article>
   )
 }

@@ -75,7 +75,7 @@ const DatePicker = ({ name, label, formSubmitted, onDateChange }) => {
       </div>
       {isCalendarVisible && (
         <div ref={calendarRef} className={datePickerStyle.calendarWrapper}>
-          <Calendar inputId={name} onDateSelect={handleDateSelect} />
+          <Calendar inputId={name} selectedDate={selectedDate} onDateSelect={handleDateSelect} />
         </div>
       )}
     </article>
