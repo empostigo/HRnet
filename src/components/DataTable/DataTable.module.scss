@@ -56,3 +56,50 @@
     }
   }
 }
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  width: 80%;
+
+  .info {
+    margin: 0;
+  }
+
+  .wrapper {
+    display: flex;
+    gap: 1em;
+  }
+
+  .changePage,
+  .navigator,
+  .disable {
+    padding: 1em;
+    cursor: pointer;
+    border: 1px solid transparent;
+
+    &:hover {
+      border: 1px solid #111;
+      border-radius: 5px;
+      background: linear-gradient(to bottom, #585858 0%, #111 100%);
+      color: white;
+    }
+  }
+
+  .ellipsis {
+    padding: 1em;
+    vertical-align: middle;
+  }
+
+  .active {
+    color: #333;
+    border-radius: 5px;
+    border: 1px solid #979797;
+    background: linear-gradient(to bottom, #fff 0%, #dcdcdc 100%);
+    pointer-events: none;
+  }
+
+  .disable {
+    pointer-events: none;
+  }
+}

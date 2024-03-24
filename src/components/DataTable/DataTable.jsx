@@ -12,6 +12,7 @@ import SortingHeader from "../SortingHeader/SortingHeader"
 
 // Style
 import dataTableStyle from "./DataTable.module.scss"
+import { current } from "@reduxjs/toolkit"
 
 const DataTable = () => {
   const nbEntries = [10, 25, 50, 100]
@@ -19,10 +20,17 @@ const DataTable = () => {
   const onNbEntriesChange = (nbEntries) => {
     setEntries(nbEntries)
   }
-
+  const [currentPage, setCurrentPage] = useState(1)
+  const previousPage = () => {
+    setCurrentPage(currentPage - 1)
+  }
+  const nextPage = () => {
+    setCurrentPage(currentPage + 1)
+  }
 
   const employees = useSelector(selectEmployees)
   const nbEmployees = employees.length
+  const totalPages = Math.ceil(nbEmployees / entries)
   const employeeFields = ["firstname", "lastname", "startDate", "department", "birthDate", "street", "city", "state", "zipCode"]
   const employeesData = employees.map((employee, index) => {
     const employeeData = employeeFields.map(field =>
@@ -34,8 +42,14 @@ const DataTable = () => {
     const startIndex = (pageNumber - 1) * nbShownEmployees
     const endIndex = startIndex + nbShownEmployees
 
-    return employeesData.slice(startIndex, endIndex)
+    return {
+      employeesDataPage: employeesData.slice(startIndex, endIndex),
+      startIndex: startIndex,
+      endIndex: endIndex
+    }
   }
+
+  const { employeesDataPage, startIndex, endIndex } = getEmployeesPage(currentPage, entries)
 
   const [sorting, setSorting] = useState([
     {
@@ -100,6 +114,24 @@ const DataTable = () => {
     )
   }
 
+  const paginationRange = (currentPage, totalPages) => {
+    const range = []
+    const nbButtons = Math.min(6, totalPages)
+    let start = currentPage - Math.floor(nbButtons / 2)
+    start = Math.max(start, 1)
+    start = Math.min(start, 1 + totalPages - nbButtons)
+
+    for (let i = start; i < start + nbButtons && i <= totalPages; i++) range.push(i)
+
+    return range
+  }
+  const pageNumbers = paginationRange(currentPage, totalPages)
+
+  useEffect(() => {
+    const totalPages = Math.ceil(employees.length / entries)
+    if (currentPage > totalPages) setCurrentPage(totalPages || 1)
+  }, [entries, currentPage, employees.length])
+
   return (
     <>
       <div className={dataTableStyle.container}>
@@ -131,12 +163,43 @@ const DataTable = () => {
               )}
           </tr>
           {
-            getEmployeesPage(1, entries)
+            employeesDataPage
           }
         </tbody>
       </table>
       <div className={dataTableStyle.footer}>
-        <p>{`Showing of ${nbEmployees} ${nbEmployees > 1 ? "entries" : "entry"}`}</p>
+        <p className={dataTableStyle.info}>{`Showing ${startIndex + 1} to ${endIndex} of ${nbEmployees} ${nbEmployees > 1 ? "entries" : "entry"}`}</p>
+        <div className={dataTableStyle.wrapper}>
+          <a onClick={previousPage} className={`${dataTableStyle.changePage} ${currentPage === 1 ? dataTableStyle.disable : ""}`}>Previous</a>
+          {
+            currentPage > 4 && totalPages > 6 && (
+              <>
+                <a className={dataTableStyle.navigator} onClick={() => setCurrentPage(1)}>1</a>
+                {currentPage > 5 && <span className={dataTableStyle.ellipsis}>...</span>}
+              </>
+            )
+          }
+          {
+            pageNumbers.map(pageNumber => (
+              <a
+                key={pageNumber}
+                onClick={() => setCurrentPage(pageNumber)}
+                className={`${dataTableStyle.navigator} ${currentPage === pageNumber ? dataTableStyle.active : ""}`}
+              >
+                {pageNumber}
+              </a>
+            ))
+          }
+          {
+            totalPages > 6 && currentPage < (totalPages - 3) && (
+              <>
+                {currentPage < (totalPages - 4) && <span className={dataTableStyle.ellipsis}>...</span>}
+                <a className={dataTableStyle.navigator} onClick={() => setCurrentPage(totalPages)}>{totalPages}</a>
+              </>
+            )
+          }
+          <a onClick={nextPage} className={`${dataTableStyle.changePage} ${currentPage === totalPages ? dataTableStyle.disable : ""}`}>Next</a>
+        </div>
       </div>
     </>
   )
