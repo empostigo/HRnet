@@ -75,11 +75,7 @@ const Calendar = ({ inputId, selectedDate, onDateSelect }) => {
 
   const handleTodayButton = () => {
     const today = new Date()
-    setMonth(today.getMonth())
-    setYear(today.getFullYear())
-    setDay(today.getDate())
-
-    const newDate = `${formatField(month + 1)}/${formatField(day)}/${year}`
+    const newDate = `${formatField(today.getMonth() + 1)}/${formatField(today.getDate())}/${today.getFullYear()}`
     document.getElementById(inputId).value = newDate
     onDateSelect(newDate)
   }
