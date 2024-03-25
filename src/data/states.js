@@ -1,4 +1,4 @@
-export const states = [
+const states = [
   {
     "name": "Alabama",
     "abbreviation": "AL"
@@ -237,3 +237,4 @@ export const states = [
   }
 ]
 
+export default states

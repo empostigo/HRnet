@@ -17,7 +17,7 @@ import UList from "../../components/UList/UList"
 import DatePicker from "../../components/DatePicker/DatePicker"
 
 // Data
-import { states } from "../../data/states"
+import states from "../../data/states"
 
 // Style
 import homeStyle from "./Home.module.scss"

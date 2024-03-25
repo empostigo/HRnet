@@ -10,9 +10,11 @@ import Select from "../../components/Select/Select"
 import UList from "../UList/UList"
 import SortingHeader from "../SortingHeader/SortingHeader"
 
+// data
+import states from "../../data/states"
+
 // Style
 import dataTableStyle from "./DataTable.module.scss"
-import { current } from "@reduxjs/toolkit"
 
 const DataTable = () => {
   const nbEntries = [10, 25, 50, 100]
@@ -28,13 +30,130 @@ const DataTable = () => {
     setCurrentPage(currentPage + 1)
   }
 
+  const getStateAbbrev = stateName => {
+    const stateObject = states.find(state => state.name === stateName)
+    return stateObject ? stateObject.abbreviation : undefined
+  }
+
   const employees = useSelector(selectEmployees)
-  const nbEmployees = employees.length
+  const [sortedEmployees, setSortedEmployees] = useState(employees)
+  const nbEmployees = sortedEmployees.length
   const totalPages = Math.ceil(nbEmployees / entries)
+
+  const generateSortFct = (fieldName, ascending = true, isDate = false) => {
+    return (a, b) => {
+      let aValue = a[fieldName]
+      let bValue = b[fieldName]
+
+      if (isDate) {
+        aValue = new Date(aValue).getTime()
+        bValue = new Date(bValue).getTime()
+      }
+
+      if (aValue < bValue) return ascending ? -1 : 1
+      if (aValue > bValue) return ascending ? 1 : -1
+      return 0
+    }
+  }
+
+  const [sorting, setSorting] = useState([
+    {
+      name: "firstname",
+      text: "First Name",
+      enableUp: true,
+      enableDown: false
+    },
+    {
+      name: "lastname",
+      text: "Last Name",
+      enableUp: false,
+      enableDown: false
+    },
+    {
+      name: "startDate",
+      text: "Start Date",
+      enableUp: false,
+      enableDown: false
+    },
+    {
+      name: "department",
+      text: "Department",
+      enableUp: false,
+      enableDown: false
+    },
+    {
+      name: "birthDate",
+      text: "Date of Birth",
+      enableUp: false,
+      enableDown: false
+    },
+    {
+      name: "street",
+      text: "Street",
+      enableUp: false,
+      enableDown: false
+    },
+    {
+      name: "city",
+      text: "City",
+      enableUp: false,
+      enableDown: false
+    },
+    {
+      name: "state",
+      text: "State",
+      enableUp: false,
+      enableDown: false
+    },
+    {
+      name: "zipCode",
+      text: "Zip Code",
+      enableUp: false,
+      enableDown: false
+    }
+  ])
+
+
+  const onSortingUsed = (header) => {
+    setSorting(prevSorting => {
+      const newSorting = prevSorting.map(item => {
+        if (item.text === header.text) {
+          const isAscending = !item.enableUp
+          const isItDate = (header.name === "startDate" || header.name === "birthDate")
+          return {
+            ...item,
+            enableUp: isAscending,
+            enableDown: !isAscending,
+            sortingFunction: generateSortFct(header.name, isAscending, isItDate)
+          }
+        }
+        return {
+          ...item,
+          enableUp: false,
+          enableDown: false
+        }
+
+      })
+
+      const activeSorting = newSorting.find(item => item.text === header.text)
+      if (activeSorting) {
+        const sorted = [...employees].sort(activeSorting.sortingFunction)
+        setSortedEmployees(sorted)
+      }
+      return newSorting
+    }
+    )
+  }
+
+
   const employeeFields = ["firstname", "lastname", "startDate", "department", "birthDate", "street", "city", "state", "zipCode"]
-  const employeesData = employees.map((employee, index) => {
+  const employeesData = sortedEmployees.map((employee, index) => {
     const employeeData = employeeFields.map(field =>
-      <td className={`${dataTableStyle.data} ${field === "firstname" ? dataTableStyle["dataFirstname"] : ""}`} key={`${field}- ${index}`}>{employee[field]}</td>)
+      <td className={`${dataTableStyle.data} ${field === "firstname" ? dataTableStyle["dataFirstname"] : ""}`} key={`${field}- ${index}`}>
+        {
+          field === "state" ? getStateAbbrev(employee[field]) : employee[field]
+        }
+      </td>)
     return <tr className={dataTableStyle.row} key={index}>{employeeData}</tr>
   })
 
@@ -51,69 +170,6 @@ const DataTable = () => {
 
   const { employeesDataPage, startIndex, endIndex } = getEmployeesPage(currentPage, entries)
 
-  const [sorting, setSorting] = useState([
-    {
-      text: "First Name",
-      enableUp: true,
-      enableDown: false
-    },
-    {
-      text: "Last Name",
-      enableUp: false,
-      enableDown: false
-    },
-    {
-      text: "Start Date",
-      enableUp: false,
-      enableDown: false
-    },
-    {
-      text: "Department",
-      enableUp: false,
-      enableDown: false
-    },
-    {
-      text: "Date of Birth",
-      enableUp: false,
-      enableDown: false
-    },
-    {
-      text: "Street",
-      enableUp: false,
-      enableDown: false
-    },
-    {
-      text: "City",
-      enableUp: false,
-      enableDown: false
-    },
-    {
-      text: "State",
-      enableUp: false,
-      enableDown: false
-    },
-    {
-      text: "Zip Code",
-      enableUp: false,
-      enableDown: false
-    }
-  ])
-
-  const onSortingUsed = (header) => {
-    setSorting(prevSorting =>
-      prevSorting.map(item => {
-        if (item.text === header.text) {
-          if (item.enableUp) return { ...item, enableUp: false, enableDown: true }
-          return { ...item, enableUp: true, enableDown: false }
-        }
-
-        return {
-          ...item, enableUp: false, enableDown: false
-        }
-      })
-    )
-  }
-
   const paginationRange = (currentPage, totalPages) => {
     const range = []
     const nbButtons = Math.min(6, totalPages)
@@ -125,12 +181,13 @@ const DataTable = () => {
 
     return range
   }
+
   const pageNumbers = paginationRange(currentPage, totalPages)
 
   useEffect(() => {
     const totalPages = Math.ceil(employees.length / entries)
     if (currentPage > totalPages) setCurrentPage(totalPages || 1)
-  }, [entries, currentPage, employees.length])
+  }, [entries, currentPage, employees, employees.length])
 
   return (
     <>

@@ -2,7 +2,7 @@
 import { createSlice } from "@reduxjs/toolkit"
 
 // Mocked data
-import data from "../../__mocks__/mockData"
+import data from "../../__mocks__/mockedData"
 
 export const employeesSlice = createSlice({
   name: "employees",
