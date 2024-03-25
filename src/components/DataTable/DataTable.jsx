@@ -187,7 +187,7 @@ const DataTable = () => {
   useEffect(() => {
     const totalPages = Math.ceil(employees.length / entries)
     if (currentPage > totalPages) setCurrentPage(totalPages || 1)
-  }, [entries, currentPage, employees, employees.length])
+  }, [entries, currentPage, employees.length])
 
   return (
     <>
