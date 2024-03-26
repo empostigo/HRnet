@@ -13,6 +13,9 @@ import SortingHeader from "../SortingHeader/SortingHeader"
 // data
 import states from "../../data/states"
 
+// assets
+import resetImg from "../../assets/xmark.svg"
+
 // Style
 import dataTableStyle from "./DataTable.module.scss"
 
@@ -215,7 +218,14 @@ const DataTable = () => {
           </div>
           <div className={dataTableStyle.searching}>
             <label htmlFor="searchField">Search:</label>
-            <input id="searchField" name="searchField" type="text" onChange={e => setSearchTerm(e.target.value)} />
+            <input id="searchField" name="searchField" type="text" value={searchTerm} onChange={e => setSearchTerm(e.target.value)} />
+            {
+              searchTerm && (
+                <button onClick={() => setSearchTerm("")} className={dataTableStyle.resetSearch}>
+                  <img src={resetImg} alt="Reset Search" className={dataTableStyle.resetCross} />
+                </button>
+              )
+            }
           </div>
         </header >
       </div >
