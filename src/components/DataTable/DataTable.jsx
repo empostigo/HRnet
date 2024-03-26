@@ -37,7 +37,20 @@ const DataTable = () => {
 
   const employees = useSelector(selectEmployees)
   const [sortedEmployees, setSortedEmployees] = useState(employees)
-  const nbEmployees = sortedEmployees.length
+  const [searchTerm, setSearchTerm] = useState("")
+  const filteredEmployees = sortedEmployees.filter(employee =>
+    employee.firstname.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    employee.lastname.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    employee.startDate.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    employee.department.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    employee.birthDate.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    employee.street.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    employee.city.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    employee.state.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    employee.zipCode.toLowerCase().includes(searchTerm.toLowerCase())
+  )
+
+  const nbEmployees = filteredEmployees.length
   const totalPages = Math.ceil(nbEmployees / entries)
 
   const generateSortFct = (fieldName, ascending = true, isDate = false) => {
@@ -147,7 +160,7 @@ const DataTable = () => {
 
 
   const employeeFields = ["firstname", "lastname", "startDate", "department", "birthDate", "street", "city", "state", "zipCode"]
-  const employeesData = sortedEmployees.map((employee, index) => {
+  const employeesData = filteredEmployees.map((employee, index) => {
     const employeeData = employeeFields.map(field =>
       <td className={`${dataTableStyle.data} ${field === "firstname" ? dataTableStyle["dataFirstname"] : ""}`} key={`${field}- ${index}`}>
         {
@@ -202,7 +215,7 @@ const DataTable = () => {
           </div>
           <div className={dataTableStyle.searching}>
             <label htmlFor="searchField">Search:</label>
-            <input id="searchField" name="searchField" type="text" />
+            <input id="searchField" name="searchField" type="text" onChange={e => setSearchTerm(e.target.value)} />
           </div>
         </header >
       </div >
