@@ -1,4 +1,4 @@
-import createMonthsCalendars, { getFebruaryNbOfDays, getFirstDayOfTheMonth } from "../utils/fillCalendar"
+import createMonthsCalendars, { getFebruaryNbOfDays, getFirstDayOfTheMonth, standardDate } from "../utils/fillCalendar"
 
 describe("Given I select a month from the months array", () => {
   test("Then I get the number of days for this month", () => {
@@ -28,6 +28,16 @@ describe("Given I have a date", () => {
   })
 })
 
+describe("Given I have a date", () => {
+  test("Then I can get a standard date", () => {
+    let date = standardDate("02/21/2024")
+    expect(date).toEqual(new Date(2024, 1, 21))
+
+    date = standardDate(null)
+    expect(date).toEqual(new Date())
+  })
+})
+
 describe("Given I have a year", () => {
   test("Then I generate the table representing all months of that year", () => {
     const testResult = [
@@ -39,7 +49,8 @@ describe("Given I have a year", () => {
           20, 21, 22, 23, 24, 25, 26, 27, 28, 29,
           30, 31, 1, 2, 3, 4, 5, 6, 7, 8,
           9, 10
-        ]
+        ],
+        disableDays: [0, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41]
       },
       {
         month: "February",
@@ -49,7 +60,8 @@ describe("Given I have a year", () => {
           17, 18, 19, 20, 21, 22, 23, 24, 25, 26,
           27, 28, 29, 1, 2, 3, 4, 5, 6, 7,
           8, 9
-        ]
+        ],
+        disableDays: [0, 1, 2, 3, 33, 34, 35, 36, 37, 38, 39, 40, 41]
       },
       {
         month: "March",
@@ -59,7 +71,8 @@ describe("Given I have a year", () => {
           16, 17, 18, 19, 20, 21, 22, 23, 24, 25,
           26, 27, 28, 29, 30, 31, 1, 2, 3, 4,
           5, 6
-        ]
+        ],
+        disableDays: [0, 1, 2, 3, 4, 36, 37, 38, 39, 40, 41]
       },
       {
         month: "April",
@@ -69,7 +82,8 @@ describe("Given I have a year", () => {
           20, 21, 22, 23, 24, 25, 26, 27, 28, 29,
           30, 1, 2, 3, 4, 5, 6, 7, 8, 9,
           10, 11
-        ]
+        ],
+        disableDays: [0, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41]
       },
       {
         month: "May",
@@ -79,7 +93,8 @@ describe("Given I have a year", () => {
           18, 19, 20, 21, 22, 23, 24, 25, 26, 27,
           28, 29, 30, 31, 1, 2, 3, 4, 5, 6,
           7, 8
-        ]
+        ],
+        disableDays: [0, 1, 2, 34, 35, 36, 37, 38, 39, 40, 41]
       },
       {
         month: "June",
@@ -89,7 +104,8 @@ describe("Given I have a year", () => {
           15, 16, 17, 18, 19, 20, 21, 22, 23, 24,
           25, 26, 27, 28, 29, 30, 1, 2, 3, 4,
           5, 6
-        ]
+        ],
+        disableDays: [0, 1, 2, 3, 4, 5, 36, 37, 38, 39, 40, 41]
       },
       {
         month: "July",
@@ -99,7 +115,8 @@ describe("Given I have a year", () => {
           20, 21, 22, 23, 24, 25, 26, 27, 28, 29,
           30, 31, 1, 2, 3, 4, 5, 6, 7, 8,
           9, 10
-        ]
+        ],
+        disableDays: [0, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41]
       },
       {
         month: "August",
@@ -109,7 +126,8 @@ describe("Given I have a year", () => {
           17, 18, 19, 20, 21, 22, 23, 24, 25, 26,
           27, 28, 29, 30, 31, 1, 2, 3, 4, 5,
           6, 7
-        ]
+        ],
+        disableDays: [0, 1, 2, 3, 35, 36, 37, 38, 39, 40, 41]
       },
       {
         month: "September",
@@ -119,7 +137,8 @@ describe("Given I have a year", () => {
           14, 15, 16, 17, 18, 19, 20, 21, 22, 23,
           24, 25, 26, 27, 28, 29, 30, 1, 2, 3,
           4, 5
-        ]
+        ],
+        disableDays: [0, 1, 2, 3, 4, 5, 6, 37, 38, 39, 40, 41]
       },
       {
         month: "October",
@@ -129,7 +148,8 @@ describe("Given I have a year", () => {
           19, 20, 21, 22, 23, 24, 25, 26, 27, 28,
           29, 30, 31, 1, 2, 3, 4, 5, 6, 7,
           8, 9
-        ]
+        ],
+        disableDays: [0, 1, 33, 34, 35, 36, 37, 38, 39, 40, 41]
       },
       {
         month: "November",
@@ -139,7 +159,8 @@ describe("Given I have a year", () => {
           16, 17, 18, 19, 20, 21, 22, 23, 24, 25,
           26, 27, 28, 29, 30, 1, 2, 3, 4, 5,
           6, 7
-        ]
+        ],
+        disableDays: [0, 1, 2, 3, 4, 35, 36, 37, 38, 39, 40, 41]
       },
       {
         month: "December",
@@ -149,7 +170,8 @@ describe("Given I have a year", () => {
           14, 15, 16, 17, 18, 19, 20, 21, 22, 23,
           24, 25, 26, 27, 28, 29, 30, 31, 1, 2,
           3, 4
-        ]
+        ],
+        disableDays: [0, 1, 2, 3, 4, 5, 6, 38, 39, 40, 41]
       }
     ]
 

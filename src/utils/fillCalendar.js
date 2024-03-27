@@ -27,15 +27,6 @@ export const getFirstDayOfTheMonth = (date) => {
   return new Date(year, month, 1).getDay()
 }
 
-export const getLastDayOfTheMonth = (date) => {
-
-  const month = date.getMonth()
-  const year = date.getFullYear()
-  const lastDayOfTheMonth = new Date(year, month + 1, 0).getDate()
-
-  return new Date(year, month, lastDayOfTheMonth).getDay()
-}
-
 const createMonthsCalendars = (year) => {
   const NB_DAYS = 42
   const months = getMonths(year)
@@ -49,7 +40,7 @@ const createMonthsCalendars = (year) => {
 
     const nbOfPreviousDaysMonth = (months[month].month === "January" ? 31 : months[month - 1].days)
     const firstDayOfMonthTable = nbOfPreviousDaysMonth - (firstDayOfTheMonth === 0 ? 7 : firstDayOfTheMonth) + 1
-    for (let i = firstDayOfMonthTable, j = 0; i <= nbOfPreviousDaysMonth; i++) {
+    for (let i = firstDayOfMonthTable; i <= nbOfPreviousDaysMonth; i++) {
       flatMonth.push(i)
       disableDays.push(disableDaysIndex++)
     }
@@ -58,7 +49,7 @@ const createMonthsCalendars = (year) => {
       disableDaysIndex++
     }
     const leftToFill = NB_DAYS - flatMonth.length
-    for (let i = 1, j = 0; i <= leftToFill; i++) {
+    for (let i = 1; i <= leftToFill; i++) {
       flatMonth.push(i)
       disableDays.push(disableDaysIndex++)
     }

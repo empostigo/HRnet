@@ -1,5 +1,5 @@
 // React
-import { useEffect, useState } from "react"
+import { useEffect } from "react"
 
 // assets
 import closing from "../../assets/closing.svg"
