@@ -5,7 +5,7 @@ import { getFirstDayOfTheMonth, standardDate } from "../../utils/fillCalendar"
 import { useEffect, useState } from "react"
 import daysStyle from "./DaysTable.module.scss"
 
-const DaysTable = ({ days, date, onChange }) => {
+const DaysTable = ({ days, date, tableHasChange, onChange }) => {
   const daysTable = days.monthTable
   const disableDays = days.disableDays
 
@@ -24,7 +24,7 @@ const DaysTable = ({ days, date, onChange }) => {
             className=
             {`
               ${daysStyle.day}
-              ${j === selectedIndex ? (!disableDays.find(element => element === j) ? daysStyle["day--selected"] : "") : ""}
+              ${j === selectedIndex && !tableHasChange ? (!disableDays.find(element => element === j) ? daysStyle["day--selected"] : "") : ""}
               ${j === 0 || disableDays.find(element => element === j) ? daysStyle["day--disable"] : ""}
             `}
             onClick={() => {

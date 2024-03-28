@@ -1,4 +1,4 @@
-const getMonths = (year) => {
+export const getMonths = (year) => {
   return [
     { month: "January", days: 31 },
     { month: "February", days: getFebruaryNbOfDays(year) },

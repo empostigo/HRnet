@@ -31,6 +31,8 @@ const Calendar = ({ inputId, selectedDate, onDateSelect }) => {
   const [month, setMonth] = useState(selectedDate.getMonth())
   const [day, setDay] = useState(selectedDate.getDate())
 
+  const [tableHasChange, setTableHasChange] = useState(false)
+
   const calendarTables = createMonthsCalendars(year)
   const monthsList = calendarTables.map(item => item.month)
 
@@ -66,10 +68,12 @@ const Calendar = ({ inputId, selectedDate, onDateSelect }) => {
   const onMonthChange = (month) => {
     const index = calendarTables.findIndex(monthObject => monthObject.month === month)
     setMonth(index)
+    setTableHasChange(true)
   }
 
   const onYearChange = (year) => {
     setYear(year)
+    setTableHasChange(true)
   }
 
   const handleTodayButton = () => {
@@ -94,7 +98,7 @@ const Calendar = ({ inputId, selectedDate, onDateSelect }) => {
           </Select>
         </div>
       </header>
-      <DaysTable days={calendarTables[month]} date={selectedDate} onChange={onDayChange} />
+      <DaysTable days={calendarTables[month]} date={selectedDate} onChange={onDayChange} tableHasChange={tableHasChange} />
     </article>
   )
 }
