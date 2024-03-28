@@ -1,8 +1,7 @@
-// Calculation
-import { getFirstDayOfTheMonth, standardDate } from "../../utils/fillCalendar"
+// React
+import { useState } from "react"
 
 // Style
-import { useEffect, useState } from "react"
 import daysStyle from "./DaysTable.module.scss"
 
 const DaysTable = ({ days, date, tableHasChange, onChange }) => {

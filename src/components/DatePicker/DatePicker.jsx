@@ -4,12 +4,14 @@ import { useState, useRef, useEffect } from "react"
 // Components
 import Calendar from "../Calendar/Calendar"
 
+// Calculation
+import { standardDate } from "../../utils/fillCalendar"
+
 // assets
 import resetField from "../../assets/xmark.svg"
 
 // Style
 import datePickerStyle from "./DatePicker.module.scss"
-import { standardDate } from "../../utils/fillCalendar"
 
 const DatePicker = ({ name, label, formSubmitted, onDateChange }) => {
   const [isCalendarVisible, setCalendarVisibility] = useState(false)
