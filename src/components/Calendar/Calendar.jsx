@@ -1,5 +1,5 @@
 // React
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 // Components
 import Select from "../Select/Select"
@@ -26,11 +26,10 @@ const MonthList = ({ list, onChange }) => {
 }
 
 const Calendar = ({ inputId, selectedDate, onDateSelect }) => {
-  const usableDate = standardDate(selectedDate)
 
-  const [year, setYear] = useState(usableDate.getFullYear())
-  const [month, setMonth] = useState(usableDate.getMonth())
-  const [day, setDay] = useState(usableDate.getDate())
+  const [year, setYear] = useState(selectedDate.getFullYear())
+  const [month, setMonth] = useState(selectedDate.getMonth())
+  const [day, setDay] = useState(selectedDate.getDate())
 
   const calendarTables = createMonthsCalendars(year)
   const monthsList = calendarTables.map(item => item.month)
@@ -61,7 +60,7 @@ const Calendar = ({ inputId, selectedDate, onDateSelect }) => {
 
     const newDate = `${formatField(month + 1)}/${formatField(day)}/${year}`
     document.getElementById(inputId).value = newDate
-    onDateSelect(newDate)
+    onDateSelect(new Date(year, month, day))
   }
 
   const onMonthChange = (month) => {
@@ -77,7 +76,7 @@ const Calendar = ({ inputId, selectedDate, onDateSelect }) => {
     const today = new Date()
     const newDate = `${formatField(today.getMonth() + 1)}/${formatField(today.getDate())}/${today.getFullYear()}`
     document.getElementById(inputId).value = newDate
-    onDateSelect(newDate)
+    onDateSelect(new Date())
   }
 
   return (
@@ -87,10 +86,10 @@ const Calendar = ({ inputId, selectedDate, onDateSelect }) => {
           <img src={todayButton} alt="Today" className={calendarStyle.icon} />
         </button>
         <div className={calendarStyle.navbar}>
-          <Select initValue={monthsList[usableDate.getMonth()]} onValueChange={onMonthChange}>
+          <Select initValue={monthsList[selectedDate.getMonth()]} onValueChange={onMonthChange}>
             <MonthList list={monthsList} />
           </Select>
-          <Select initValue={usableDate.getFullYear()} onValueChange={onYearChange}>
+          <Select initValue={selectedDate.getFullYear()} onValueChange={onYearChange}>
             <Pagination items={yearsTable} />
           </Select>
         </div>

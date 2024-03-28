@@ -6,10 +6,13 @@ import { useEffect, useState } from "react"
 import daysStyle from "./DaysTable.module.scss"
 
 const DaysTable = ({ days, date, onChange }) => {
+  const date = typeof (selectedDate) === "string" ? standardDate(selectedDate) : selectedDate
   const daysTable = days.monthTable
+  console.log(daysTable)
   const disableDays = days.disableDays
 
-  const selectedDayIndex = daysTable.indexOf(1) + date.getDate() - 1
+  const firstDayOfTheMonth = getFirstDayOfTheMonth(date)
+  const selectedDayIndex = daysTable[daysTable.indexOf(firstDayOfTheMonth + date.getDate() - 1)];
   const [selectedIndex, setSelectedIndex] = useState(selectedDayIndex)
 
   const daysName = ["Sun.", "Mon.", "Tue.", "Wed.", "Thu.", "Fri", "Sat."].map(day => <th key={`${day}`}>{day}</th>)
@@ -21,14 +24,14 @@ const DaysTable = ({ days, date, onChange }) => {
         tmpColumn.push(
           <td
             key={`${i}-${j}`}
-            className=
-            {`
+            className={`
               ${daysStyle.day}
-              ${j === selectedIndex ? (!disableDays.find(element => element === j) ? daysStyle["day--selected"] : "") : ""}
+              ${j === selectedIndex ? daysStyle["day--selected"] : ""}
               ${j === 0 || disableDays.find(element => element === j) ? daysStyle["day--disable"] : ""}
-            `}
+          `}
             onClick={() => {
               setSelectedIndex(j)
+              console.log(j)
               onChange(daysTable[j])
             }}
           >
@@ -42,6 +45,12 @@ const DaysTable = ({ days, date, onChange }) => {
 
     return column
   }
+
+  /*
+  useEffect(() => {
+    setSelectedIndex(selectedDayIndex)
+  }, [date])
+  */
 
   return (
     <table className={daysStyle.wrapper}>
