@@ -20,8 +20,11 @@ import resetImg from "../../assets/xmark.svg"
 import dataTableStyle from "./DataTable.module.scss"
 
 const DataTable = () => {
+  // States for managing number of entries, current page, and sorting
   const nbEntries = [10, 25, 50, 100]
   const [entries, setEntries] = useState(nbEntries[0])
+
+  // Handles changing the number of entries per page
   const onNbEntriesChange = nbEntries => {
     setEntries(nbEntries)
   }
@@ -33,6 +36,7 @@ const DataTable = () => {
     setCurrentPage(currentPage + 1)
   }
 
+  // Helper function to get state abbreviation from name
   const getStateAbbrev = stateName => {
     const stateObject = states.find(state => state.name === stateName)
     return stateObject ? stateObject.abbreviation : undefined
@@ -57,12 +61,14 @@ const DataTable = () => {
   const nbEmployees = filteredEmployees.length
   const totalPages = Math.ceil(nbEmployees / entries)
 
+  // Generates a sorting function based on the field name and order
   const generateSortFct = (fieldName, ascending = true, isDate = false) => {
     return (a, b) => {
       let aValue = a[fieldName]
       let bValue = b[fieldName]
 
       if (isDate) {
+        // get milliseconds for comparison
         aValue = new Date(aValue).getTime()
         bValue = new Date(bValue).getTime()
       }
@@ -73,6 +79,7 @@ const DataTable = () => {
     }
   }
 
+  // State for managing sorting headers and their states
   const [sorting, setSorting] = useState([
     {
       name: "firstname",
@@ -189,6 +196,7 @@ const DataTable = () => {
     )
   })
 
+  // Pagination logic to slice the current page data
   const getEmployeesPage = (pageNumber, nbShownEmployees) => {
     const startIndex = (pageNumber - 1) * nbShownEmployees
     const endIndex = startIndex + nbShownEmployees
@@ -205,6 +213,7 @@ const DataTable = () => {
     entries
   )
 
+  // Generates the range of page numbers for pagination buttons
   const paginationRange = (currentPage, totalPages) => {
     const range = []
     const nbButtons = Math.min(6, totalPages)
