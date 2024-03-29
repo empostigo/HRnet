@@ -12,7 +12,7 @@ import selectStyle from "./Select.module.scss"
  * Renders a custom dropdown list component.
  *
  * The `Select` component allows for the selection of an option from a dropdown list. It is a more customizable
- * alternative to the native HTML `<select>` element, enabling the use of custom styling and complex option rendering.
+ * alternative to the native HTML <select> element, enabling the use of custom styling and complex option rendering.
  * The component manages its open/closed state and communicates the selected value via a callback.
  *
  * @param {object} props - The component props.
