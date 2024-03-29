@@ -22,7 +22,7 @@ import dataTableStyle from "./DataTable.module.scss"
 const DataTable = () => {
   const nbEntries = [10, 25, 50, 100]
   const [entries, setEntries] = useState(nbEntries[0])
-  const onNbEntriesChange = (nbEntries) => {
+  const onNbEntriesChange = nbEntries => {
     setEntries(nbEntries)
   }
   const [currentPage, setCurrentPage] = useState(1)
@@ -41,16 +41,17 @@ const DataTable = () => {
   const employees = useSelector(selectEmployees)
   const [sortedEmployees, setSortedEmployees] = useState(employees)
   const [searchTerm, setSearchTerm] = useState("")
-  const filteredEmployees = sortedEmployees.filter(employee =>
-    employee.firstname.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    employee.lastname.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    employee.startDate.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    employee.department.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    employee.birthDate.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    employee.street.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    employee.city.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    employee.state.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    employee.zipCode.toLowerCase().includes(searchTerm.toLowerCase())
+  const filteredEmployees = sortedEmployees.filter(
+    employee =>
+      employee.firstname.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      employee.lastname.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      employee.startDate.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      employee.department.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      employee.birthDate.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      employee.street.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      employee.city.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      employee.state.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      employee.zipCode.toLowerCase().includes(searchTerm.toLowerCase())
   )
 
   const nbEmployees = filteredEmployees.length
@@ -129,13 +130,13 @@ const DataTable = () => {
     }
   ])
 
-
-  const onSortingUsed = (header) => {
+  const onSortingUsed = header => {
     setSorting(prevSorting => {
       const newSorting = prevSorting.map(item => {
         if (item.text === header.text) {
           const isAscending = !item.enableUp
-          const isItDate = (header.name === "startDate" || header.name === "birthDate")
+          const isItDate =
+            header.name === "startDate" || header.name === "birthDate"
           return {
             ...item,
             enableUp: isAscending,
@@ -148,7 +149,6 @@ const DataTable = () => {
           enableUp: false,
           enableDown: false
         }
-
       })
 
       const activeSorting = newSorting.find(item => item.text === header.text)
@@ -157,20 +157,36 @@ const DataTable = () => {
         setSortedEmployees(sorted)
       }
       return newSorting
-    }
-    )
+    })
   }
 
-
-  const employeeFields = ["firstname", "lastname", "startDate", "department", "birthDate", "street", "city", "state", "zipCode"]
+  const employeeFields = [
+    "firstname",
+    "lastname",
+    "startDate",
+    "department",
+    "birthDate",
+    "street",
+    "city",
+    "state",
+    "zipCode"
+  ]
   const employeesData = filteredEmployees.map((employee, index) => {
-    const employeeData = employeeFields.map(field =>
-      <td className={`${dataTableStyle.data} ${field === "firstname" ? dataTableStyle["dataFirstname"] : ""}`} key={`${field}- ${index}`}>
-        {
-          field === "state" ? getStateAbbrev(employee[field]) : employee[field]
-        }
-      </td>)
-    return <tr className={dataTableStyle.row} key={index}>{employeeData}</tr>
+    const employeeData = employeeFields.map(field => (
+      <td
+        className={`${dataTableStyle.data} ${
+          field === "firstname" ? dataTableStyle["dataFirstname"] : ""
+        }`}
+        key={`${field}- ${index}`}
+      >
+        {field === "state" ? getStateAbbrev(employee[field]) : employee[field]}
+      </td>
+    ))
+    return (
+      <tr className={dataTableStyle.row} key={index}>
+        {employeeData}
+      </tr>
+    )
   })
 
   const getEmployeesPage = (pageNumber, nbShownEmployees) => {
@@ -184,7 +200,10 @@ const DataTable = () => {
     }
   }
 
-  const { employeesDataPage, startIndex, endIndex } = getEmployeesPage(currentPage, entries)
+  const { employeesDataPage, startIndex, endIndex } = getEmployeesPage(
+    currentPage,
+    entries
+  )
 
   const paginationRange = (currentPage, totalPages) => {
     const range = []
@@ -193,7 +212,8 @@ const DataTable = () => {
     start = Math.max(start, 1)
     start = Math.min(start, 1 + totalPages - nbButtons)
 
-    for (let i = start; i < start + nbButtons && i <= totalPages; i++) range.push(i)
+    for (let i = start; i < start + nbButtons && i <= totalPages; i++)
+      range.push(i)
 
     return range
   }
@@ -218,67 +238,104 @@ const DataTable = () => {
           </div>
           <div className={dataTableStyle.searching}>
             <label htmlFor="searchField">Search:</label>
-            <input id="searchField" name="searchField" type="text" value={searchTerm} onChange={e => setSearchTerm(e.target.value)} />
-            {
-              searchTerm && (
-                <button onClick={() => setSearchTerm("")} className={dataTableStyle.resetSearch}>
-                  <img src={resetImg} alt="Reset Search" className={dataTableStyle.resetCross} />
-                </button>
-              )
-            }
+            <input
+              id="searchField"
+              name="searchField"
+              type="text"
+              value={searchTerm}
+              onChange={e => setSearchTerm(e.target.value)}
+            />
+            {searchTerm && (
+              <button
+                onClick={() => setSearchTerm("")}
+                className={dataTableStyle.resetSearch}
+              >
+                <img
+                  src={resetImg}
+                  alt="Reset Search"
+                  className={dataTableStyle.resetCross}
+                />
+              </button>
+            )}
           </div>
-        </header >
-      </div >
+        </header>
+      </div>
       <table className={dataTableStyle.table}>
         <tbody className={dataTableStyle.tbody}>
           <tr className={dataTableStyle.theaders}>
-            {
-              sorting.map(header =>
-                <th
-                  key={header.text}
-                  onClick={() => onSortingUsed(header)}
-                >
-                  <SortingHeader key={crypto.randomUUID()} text={header.text} sortingItem={header} />
-                </th>
-              )}
+            {sorting.map(header => (
+              <th key={header.text} onClick={() => onSortingUsed(header)}>
+                <SortingHeader
+                  key={crypto.randomUUID()}
+                  text={header.text}
+                  sortingItem={header}
+                />
+              </th>
+            ))}
           </tr>
-          {
-            employeesDataPage
-          }
+          {employeesDataPage}
         </tbody>
       </table>
       <div className={dataTableStyle.footer}>
-        <p className={dataTableStyle.info}>{`Showing ${startIndex + 1} to ${endIndex} of ${nbEmployees} ${nbEmployees > 1 ? "entries" : "entry"}`}</p>
+        <p className={dataTableStyle.info}>{`Showing ${
+          startIndex + 1
+        } to ${endIndex} of ${nbEmployees} ${
+          nbEmployees > 1 ? "entries" : "entry"
+        }`}</p>
         <div className={dataTableStyle.wrapper}>
-          <a onClick={previousPage} className={`${dataTableStyle.changePage} ${currentPage === 1 ? dataTableStyle.disable : ""}`}>Previous</a>
-          {
-            currentPage > 4 && totalPages > 6 && (
-              <>
-                <a className={dataTableStyle.navigator} onClick={() => setCurrentPage(1)}>1</a>
-                {currentPage > 5 && <span className={dataTableStyle.ellipsis}>...</span>}
-              </>
-            )
-          }
-          {
-            pageNumbers.map(pageNumber => (
+          <a
+            onClick={previousPage}
+            className={`${dataTableStyle.changePage} ${
+              currentPage === 1 ? dataTableStyle.disable : ""
+            }`}
+          >
+            Previous
+          </a>
+          {currentPage > 4 && totalPages > 6 && (
+            <>
               <a
-                key={pageNumber}
-                onClick={() => setCurrentPage(pageNumber)}
-                className={`${dataTableStyle.navigator} ${currentPage === pageNumber ? dataTableStyle.active : ""}`}
+                className={dataTableStyle.navigator}
+                onClick={() => setCurrentPage(1)}
               >
-                {pageNumber}
+                1
               </a>
-            ))
-          }
-          {
-            totalPages > 6 && currentPage < (totalPages - 3) && (
-              <>
-                {currentPage < (totalPages - 4) && <span className={dataTableStyle.ellipsis}>...</span>}
-                <a className={dataTableStyle.navigator} onClick={() => setCurrentPage(totalPages)}>{totalPages}</a>
-              </>
-            )
-          }
-          <a onClick={nextPage} className={`${dataTableStyle.changePage} ${currentPage === totalPages ? dataTableStyle.disable : ""}`}>Next</a>
+              {currentPage > 5 && (
+                <span className={dataTableStyle.ellipsis}>...</span>
+              )}
+            </>
+          )}
+          {pageNumbers.map(pageNumber => (
+            <a
+              key={pageNumber}
+              onClick={() => setCurrentPage(pageNumber)}
+              className={`${dataTableStyle.navigator} ${
+                currentPage === pageNumber ? dataTableStyle.active : ""
+              }`}
+            >
+              {pageNumber}
+            </a>
+          ))}
+          {totalPages > 6 && currentPage < totalPages - 3 && (
+            <>
+              {currentPage < totalPages - 4 && (
+                <span className={dataTableStyle.ellipsis}>...</span>
+              )}
+              <a
+                className={dataTableStyle.navigator}
+                onClick={() => setCurrentPage(totalPages)}
+              >
+                {totalPages}
+              </a>
+            </>
+          )}
+          <a
+            onClick={nextPage}
+            className={`${dataTableStyle.changePage} ${
+              currentPage === totalPages ? dataTableStyle.disable : ""
+            }`}
+          >
+            Next
+          </a>
         </div>
       </div>
     </>
