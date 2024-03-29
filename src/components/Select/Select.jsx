@@ -8,28 +8,52 @@ import angleUp from "../../assets/arrows/angle-up.svg"
 // Styles
 import selectStyle from "./Select.module.scss"
 
+/**
+ * `Select` component renders a custom dropdown list.
+ *
+ * @param {Object} props - The props passed to the component.
+ * @param {string} props.initValue - The initial value to display in the select button.
+ * @param {ReactNode} props.children - The child components or elements, usually `Option` components to render inside the dropdown.
+ * @param {string} [props.id] - The optional ID for the select button, useful for associating a label for accessibility.
+ * @param {function} props.onValueChange - Callback function that is called when a new value is selected.
+ */
 const Select = ({ initValue, children, id, onValueChange }) => {
-
   const [dropdownState, setDropdownState] = useState({ open: false })
   const [buttonValue, setButtonValue] = useState(initValue)
   const [wrapperHeight, setWrapperHeight] = useState(0)
 
   const wrapper = useRef()
 
-  const toggleDropdown = () =>
-    setDropdownState({ open: !dropdownState.open })
+  /**
+   * Toggles the visibility of the dropdown list.
+   */
+  const toggleDropdown = () => setDropdownState({ open: !dropdownState.open })
 
-  const setValue = (value) => {
+  /**
+   * Updates the currently selected value and closes the dropdown.
+   *
+   * @param {string} value - The selected value to set.
+   */
+  const setValue = value => {
     setButtonValue(value)
     onValueChange(value)
     setDropdownState({ open: false })
   }
 
-  const hasClickOutside = (event) => {
+  /**
+   * Detects clicks outside of the component to close the dropdown.
+   *
+   * @param {MouseEvent} event - The mouse event.
+   */
+  const hasClickOutside = event => {
     if (wrapper.current && !wrapper.current.contains(event.target))
       setDropdownState({ open: false })
   }
 
+  /**
+   * Attaches and cleans up event listeners for detecting clicks outside the component.
+   * Sets the initial selected value and calculates the dropdown wrapper height for positioning.
+   */
   useEffect(() => {
     document.addEventListener("mousedown", hasClickOutside)
 
@@ -40,8 +64,19 @@ const Select = ({ initValue, children, id, onValueChange }) => {
     return () => document.removeEventListener("mousedown", hasClickOutside)
   }, [initValue])
 
+  /**
+   * Enhances the children components with additional props.
+   *
+   * This process involves mapping over each child element of the `Select` component,
+   * and conditionally passing the `setValue` function as an `onChange` prop to each.
+   * This enables child components to interact with the `Select` component by changing its state,
+   * facilitating a two-way data binding pattern between the `Select` and its children.
+   *
+   * @returns {ReactNode[]} The array of React child elements with added props.
+   */
   const childrenWithProps = React.Children.map(children, child => {
-    if (React, isValidElement(child)) return React.cloneElement(child, { onChange: setValue })
+    if ((React, isValidElement(child)))
+      return React.cloneElement(child, { onChange: setValue })
 
     return child
   })
@@ -55,12 +90,20 @@ const Select = ({ initValue, children, id, onValueChange }) => {
         id={id}
       >
         <span className={selectStyle.text}>{buttonValue}</span>
-        <img src={angleDown} alt="Open Dropdown" className={dropdownState.open ? selectStyle.hidden : ""} />
-        <img src={angleUp} alt="Close Dropdown" className={!dropdownState.open ? selectStyle.hidden : ""} />
+        <img
+          src={angleDown}
+          alt="Open Dropdown"
+          className={dropdownState.open ? selectStyle.hidden : ""}
+        />
+        <img
+          src={angleUp}
+          alt="Close Dropdown"
+          className={!dropdownState.open ? selectStyle.hidden : ""}
+        />
       </button>
-      {
-        dropdownState.open &&
-        <div className={selectStyle.style}
+      {dropdownState.open && (
+        <div
+          className={selectStyle.style}
           style={{
             position: "absolute",
             top: `${wrapperHeight}px`,
@@ -69,8 +112,8 @@ const Select = ({ initValue, children, id, onValueChange }) => {
         >
           {childrenWithProps}
         </div>
-      }
-    </div >
+      )}
+    </div>
   )
 }
 
