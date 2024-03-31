@@ -2,10 +2,7 @@
 import { useState, useRef, useEffect } from "react"
 
 // Components
-import Calendar from "../Calendar/Calendar"
-
-// Calculation
-import { standardDate } from "../../utils/fillCalendar"
+import { Calendar } from "em-react-calendar-test9"
 
 // assets
 import resetField from "../../assets/xmark.svg"
@@ -39,7 +36,7 @@ const DatePicker = ({ name, label, formSubmitted, onDateChange }) => {
    * @param {Date|string} date - The date selected from the calendar.
    */
   const handleDateSelect = date => {
-    setSelectedDate(typeof date === "string" ? standardDate(date) : date)
+    setSelectedDate(date)
     setCalendarVisibility(false)
     onDateChange(selectedDate)
     if (inputRef.current) {

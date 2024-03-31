@@ -12,7 +12,7 @@ import { useDispatch } from "react-redux"
 import { addEmployee } from "../../features/employees/employeesSlice"
 
 // Components
-import Select from "../../components/Select/Select"
+import { Select } from "em-react-calendar-test9"
 import UList from "../../components/UList/UList"
 import DatePicker from "../../components/DatePicker/DatePicker"
 
@@ -103,7 +103,7 @@ const Home = () => {
             <input id="city" type="text" autoComplete="true" {...register("city")} required />
 
             <label htmlFor="state">State</label>
-            <Select initValue={state} id={"state"} onValueChange={onStateChange}>
+            <Select value={state} id={"state"} onValueChange={onStateChange}>
               <UList list={states.map(state => state.name)} />
             </Select>
 
@@ -112,7 +112,7 @@ const Home = () => {
           </fieldset>
 
           <label htmlFor="department">Department</label>
-          <Select initValue={department} id={"department"} onValueChange={onDepartmentChange}>
+          <Select value={department} id={"department"} onValueChange={onDepartmentChange}>
             <UList list={departments} />
           </Select>
           <input type="submit" />

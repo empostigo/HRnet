@@ -26,11 +26,11 @@ export const getFebruaryNbOfDays = year =>
   (year % 4 === 0 && year % 100 !== 0) || year % 400 === 0 ? 29 : 28
 
 /**
- * Determines the day of the week the first day of a given month falls on.
- *
- * @param {Date} date - A date object representing any day within the month to check.
- * @returns {number} The day of the week (0-6) where 0 is Sunday.
- */
+* Determines the day of the week the first day of a given month falls on.
+*
+* @param {Date} date - A date object representing any day within the month to check.
+* @returns {number} The day of the week (0-6) where 0 is Sunday.
+*/
 export const getFirstDayOfTheMonth = date => {
   if (date.getDate() === 1) return date.getDay()
 

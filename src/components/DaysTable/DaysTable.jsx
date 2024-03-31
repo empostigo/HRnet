@@ -17,10 +17,9 @@ import daysStyle from "./DaysTable.module.scss"
  * @param {Function} props.onChange - A callback function to handle the event when a new day is selected from the table.
  */
 const DaysTable = ({ days, date, tableHasChange, onChange }) => {
-  const daysTable = days.monthTable
-  const disableDays = days.disableDays
+  const { monthTable, disableDays } = days
 
-  const selectedDayIndex = daysTable.indexOf(1) + date.getDate() - 1
+  const selectedDayIndex = monthTable.indexOf(1) + date.getDate() - 1
   const [selectedIndex, setSelectedIndex] = useState(selectedDayIndex)
 
   const daysName = ["Sun.", "Mon.", "Tue.", "Wed.", "Thu.", "Fri", "Sat."].map(
@@ -35,7 +34,7 @@ const DaysTable = ({ days, date, tableHasChange, onChange }) => {
    */
   const tableDays = () => {
     let column = []
-    for (let i = 0; i < daysTable.length; i += 7) {
+    for (let i = 0; i < monthTable.length; i += 7) {
       let tmpColumn = []
       for (let j = i; j <= i + 6; j++) {
         tmpColumn.push(
@@ -43,25 +42,23 @@ const DaysTable = ({ days, date, tableHasChange, onChange }) => {
             key={`${i}-${j}`}
             className={`
               ${daysStyle.day}
-              ${
-                j === selectedIndex && !tableHasChange
-                  ? !disableDays.find(element => element === j)
-                    ? daysStyle["day--selected"]
-                    : ""
+              ${j === selectedIndex && !tableHasChange
+                ? !disableDays.find(element => element === j)
+                  ? daysStyle["day--selected"]
                   : ""
+                : ""
               }
-              ${
-                j === 0 || disableDays.find(element => element === j)
-                  ? daysStyle["day--disable"]
-                  : ""
+              ${j === 0 || disableDays.find(element => element === j)
+                ? daysStyle["day--disable"]
+                : ""
               }
             `}
             onClick={() => {
               setSelectedIndex(j)
-              onChange(daysTable[j])
+              onChange(monthTable[j])
             }}
           >
-            {daysTable[j]}
+            {monthTable[j]}
           </td>
         )
       }

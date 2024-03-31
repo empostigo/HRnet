@@ -2,8 +2,10 @@
 import React, { isValidElement, useEffect, useRef, useState } from "react"
 
 // Icons
-import angleDown from "../../assets/arrows/angle-down.svg"
-import angleUp from "../../assets/arrows/angle-up.svg"
+import blackAngleDown from "../../assets/arrows/black-angle-down.svg"
+import blackAngleUp from "../../assets/arrows/black-angle-up.svg"
+import goldenAngleDown from "../../assets/arrows/golden-angle-down .svg"
+import goldenAngleUp from "../../assets/arrows/golden-angle-up.svg"
 
 // Styles
 import selectStyle from "./Select.module.scss"
@@ -95,12 +97,12 @@ const Select = ({ initValue, children, id, onValueChange }) => {
       >
         <span className={selectStyle.text}>{buttonValue}</span>
         <img
-          src={angleDown}
+          src={id ? blackAngleDown : goldenAngleDown}
           alt="Open Dropdown"
           className={dropdownState.open ? selectStyle.hidden : ""}
         />
         <img
-          src={angleUp}
+          src={id ? blackAngleUp : goldenAngleUp}
           alt="Close Dropdown"
           className={!dropdownState.open ? selectStyle.hidden : ""}
         />
