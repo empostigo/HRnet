@@ -6,7 +6,7 @@ import { useSelector } from "react-redux"
 import { selectEmployees } from "../../features/employees/employeesSlice"
 
 // Components
-import Select from "../../components/Select/Select"
+import { Select } from "em-react-calendar-test9"
 import UList from "../UList/UList"
 import SortingHeader from "../SortingHeader/SortingHeader"
 
@@ -240,7 +240,11 @@ const DataTable = () => {
         <header className={dataTableStyle.header}>
           <div className={dataTableStyle.entries}>
             <span>Show</span>
-            <Select initValue={nbEntries[0]} onValueChange={onNbEntriesChange}>
+            <Select
+              value={nbEntries[0]}
+              id="nbEntries"
+              onValueChange={onNbEntriesChange}
+            >
               <UList list={nbEntries} />
             </Select>
             <span>entries</span>
