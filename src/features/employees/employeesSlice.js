@@ -12,8 +12,9 @@ export const employeesSlice = createSlice({
   reducers: {
     addEmployee: (state, action) => {
       state.list.push(action.payload)
-    },
-  },
+      state.list.sort((a, b) => a.firstname.localeCompare(b.firstname, "en-US"))
+    }
+  }
 })
 
 // Selector

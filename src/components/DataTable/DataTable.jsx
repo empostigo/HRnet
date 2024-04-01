@@ -160,7 +160,7 @@ const DataTable = () => {
 
       const activeSorting = newSorting.find(item => item.text === header.text)
       if (activeSorting) {
-        const sorted = [...employees].sort(activeSorting.sortingFunction)
+        const sorted = [...sortedEmployees].sort(activeSorting.sortingFunction)
         setSortedEmployees(sorted)
       }
       return newSorting
