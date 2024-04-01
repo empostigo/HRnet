@@ -22,8 +22,8 @@ JQuery plugins realised in React:
 
 ![Data Table](./readme-assets/datatable.png)
 
-I choose to created the date selection plugin. The source code is available [here]() \
-And it is available [here]() on the npm site.
+I choose to created the date selection plugin. The source code is available [here](https://github.com/empostigo/em-react-calendar) \
+And it is available [here](https://www.npmjs.com/package/em-react-calendar) on the npm site.
 
 ## Installation
 
