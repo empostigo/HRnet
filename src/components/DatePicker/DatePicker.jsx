@@ -2,7 +2,7 @@
 import { useState, useRef, useEffect } from "react"
 
 // Components
-import { Calendar } from "em-react-calendar-test9"
+import { Calendar } from "em-react-calendar"
 
 // assets
 import resetField from "../../assets/xmark.svg"

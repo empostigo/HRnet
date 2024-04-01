@@ -6,7 +6,7 @@ import { useSelector } from "react-redux"
 import { selectEmployees } from "../../features/employees/employeesSlice"
 
 // Components
-import { Select } from "em-react-calendar-test9"
+import { Select } from "em-react-calendar"
 import UList from "../UList/UList"
 import SortingHeader from "../SortingHeader/SortingHeader"
 

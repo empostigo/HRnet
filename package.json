@@ -19,7 +19,7 @@
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.2.2",
-    "em-react-calendar-test9": "^1.0.5",
+    "em-react-calendar": "^1.0.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.51.1",
